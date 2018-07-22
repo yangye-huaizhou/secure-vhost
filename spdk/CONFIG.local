@@ -1,0 +1,1 @@
+CONFIG_DPDK_DIR?=/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc

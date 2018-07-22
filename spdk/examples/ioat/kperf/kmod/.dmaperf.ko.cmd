@@ -1,0 +1,1 @@
+cmd_/home/yangye/spdk/examples/ioat/kperf/kmod/dmaperf.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/yangye/spdk/examples/ioat/kperf/kmod/dmaperf.ko /home/yangye/spdk/examples/ioat/kperf/kmod/dmaperf.o /home/yangye/spdk/examples/ioat/kperf/kmod/dmaperf.mod.o ;  true

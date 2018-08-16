@@ -1,2 +1,0 @@
-#!/bin/bash
-qemu-system-x86_64 -c 0x4 -w 0000:00:04.0 -- -machine accel=kvm -cpu host -smp sockets=1,cores=1,threads=1 -m 2048M -object memory-backend-file,id=mem,size=2048M,mem-path=/dev/hugepages,share=on -drive file=/var/iso/virtual.qcow2 -mem-prealloc -numa node,memdev=mem -vnc 0.0.0.0:50 --enable-kvm -chardev socket,id=char1,path=/tmp/sock0,server -netdev type=vhost-user,id=mynet1,chardev=char1,vhostforce -device virtio-net-pci,netdev=mynet1,id=net1,mac=00:00:00:00:00:01

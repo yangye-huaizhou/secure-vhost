@@ -403,7 +403,6 @@ init(void)
 
 	spdk_env_opts_init(&opts);
 	opts.name = "perf";
-	//struct user_config *new=&g_user_config;
 	
 	opts.core_mask = g_user_config.core_mask;
 	opts.blacklist = g_user_config.blacklist;
@@ -536,14 +535,6 @@ main(int argc, char **argv)
 	if (init() != 0) {
 		return 1;
 	}
-//        if(rte_eal_process_type() == RTE_PROC_PRIMARY)
-//        {
-                        //unregister_workers();
-//                        ioat_exit();
-//                        while(1)
-//                        {
-//                        }
-//        }
 
 	
 	if (register_workers() != 0) {

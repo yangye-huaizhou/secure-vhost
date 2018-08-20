@@ -1,7 +1,7 @@
 # -*- makefile -*-
-export builddir = /home/yangye/vhostioat/openvswitch-2.9.2/datapath/linux
-export srcdir = /home/yangye/vhostioat/openvswitch-2.9.2/datapath/linux
-export top_srcdir = /home/yangye/vhostioat/openvswitch-2.9.2
+export builddir = /home/yangye/secure-vhost/openvswitch-2.9.2/datapath/linux
+export srcdir = /home/yangye/secure-vhost/openvswitch-2.9.2/datapath/linux
+export top_srcdir = /home/yangye/secure-vhost/openvswitch-2.9.2
 export VERSION = 2.9.2
 
 include $(srcdir)/../Modules.mk

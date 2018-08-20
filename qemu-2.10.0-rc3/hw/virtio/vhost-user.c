@@ -1402,22 +1402,23 @@ do_data_copy_dequeue(struct vhost_dev *dev,struct virtio_virtqueue *vq)
 	for (i = 0; i < count; i++) {
 //		if(elem[i].len>=512)
 //		{
-//			spdk_ioat_submit_copy(dev->dev_ioat, dev, ioat_done, elem[i].dst, elem[i].src, elem[i].len);
-//			dev->ioat_submit++;
+			//spdk_ioat_submit_copy(dev->dev_ioat, dev, ioat_done, elem[i].dst, elem[i].src, elem[i].len);
+			//dev->ioat_submit++;
 //		}
 //		else
-			rte_memcpy(elem[i].dst, elem[i].src, elem[i].len);
-		//rte_memcpy(elem[i].dst, elem[i].src, elem[i].len);
+			//rte_memcpy(elem[i].dst, elem[i].src, elem[i].len);
+		rte_memcpy(elem[i].dst, elem[i].src, elem[i].len);
 		
 		//vhost_log_write(dev, elem[i].log_addr, elem[i].len);
 		//PRINT_PACKET(dev, (uintptr_t)elem[i].dst, elem[i].len, 0);
 	}
-/*
-	while(dev->ioat_submit>0)
-	{
-		spdk_ioat_process_events(dev->dev_ioat);
-	}
-*/
+	//sched_yield();
+
+//	while(dev->ioat_submit>0)
+//	{
+//		spdk_ioat_process_events(dev->dev_ioat);
+//	}
+
 }
 
 
@@ -2297,12 +2298,12 @@ do_data_copy_enqueue(struct vhost_dev *dev, struct virtio_virtqueue *vq)
 		//vhost_log_write(dev, elem[i].log_addr, elem[i].len);
 		//PRINT_PACKET(dev, (uintptr_t)elem[i].dst, elem[i].len, 0);
 	}
-/*
-	while(dev->ioat_submit>0)
-	{
-		spdk_ioat_process_events(dev->dev_ioat);
-	}
-*/
+	//sched_yield();
+//	while(dev->ioat_submit>0)
+//	{
+//		spdk_ioat_process_events(dev->dev_ioat);
+//	}
+
 }
 
 static inline void
@@ -2548,6 +2549,8 @@ void *packet_process_burst(void *arg)
 				if(count_eq==0 && count_dq==0)
 				{
 					goto yield;
+					//sched_yield();
+					//continue;
 				}
 				if(count_eq!=0)
 				{

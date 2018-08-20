@@ -89,51 +89,51 @@ lib/netdev-tc-offloads.lo: lib/netdev-tc-offloads.c \
  /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/linux/if_ether.h lib/dpif.h lib/dpdk.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_lcore.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_lcore.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h \
  /usr/include/pthread.h /usr/include/sched.h \
  /usr/include/x86_64-linux-gnu/bits/sched.h \
  /usr/include/x86_64-linux-gnu/bits/timex.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus.h \
  /usr/include/x86_64-linux-gnu/sys/queue.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h \
  /usr/include/ctype.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci_dev_feature_defs.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_launch.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci_dev_feature_defs.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_launch.h \
  lib/dp-packet.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mempool.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_spinlock.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_spinlock.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_pause.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mempool.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_spinlock.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_spinlock.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_pause.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/emmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/mmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/mm_malloc.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_rtm.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cpuflags.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cpuflags.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_debug.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memory.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ring.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_atomic.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic_64.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memzone.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memcpy.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_vect.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_vect.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_rtm.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cpuflags.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cpuflags.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_debug.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memory.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ring.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_atomic.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic_64.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memzone.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memcpy.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_vect.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_vect.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/x86intrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/ia32intrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/pmmintrin.h \
@@ -183,9 +183,9 @@ lib/netdev-tc-offloads.lo: lib/netdev-tc-offloads.c \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/xsavesintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/xsavecintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/mwaitxintrin.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_prefetch.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_prefetch.h \
- /home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf_ptype.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_prefetch.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_prefetch.h \
+ ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf_ptype.h \
  lib/netdev-dpdk.h include/openvswitch/ofp-util.h \
  include/openvswitch/match.h include/openvswitch/meta-flow.h \
  /usr/include/netinet/ip6.h include/openvswitch/ofp-errors.h \
@@ -490,11 +490,11 @@ lib/dpif.h:
 
 lib/dpdk.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_lcore.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_lcore.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h:
 
 /usr/include/pthread.h:
 
@@ -506,37 +506,37 @@ lib/dpdk.h:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus.h:
 
 /usr/include/x86_64-linux-gnu/sys/queue.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h:
 
 /usr/include/ctype.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci_dev_feature_defs.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci_dev_feature_defs.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_launch.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_launch.h:
 
 lib/dp-packet.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mempool.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mempool.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_spinlock.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_spinlock.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_spinlock.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_spinlock.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_pause.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_pause.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/emmintrin.h:
 
@@ -546,41 +546,41 @@ lib/dp-packet.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/mm_malloc.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_rtm.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_rtm.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cpuflags.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cpuflags.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cpuflags.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cpuflags.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_debug.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_debug.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memory.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memory.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ring.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ring.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_atomic.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_atomic.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic_64.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic_64.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memzone.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memzone.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memcpy.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memcpy.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_vect.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_vect.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_vect.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_vect.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/x86intrin.h:
 
@@ -680,11 +680,11 @@ lib/dp-packet.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/mwaitxintrin.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_prefetch.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_prefetch.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_prefetch.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_prefetch.h:
 
-/home/yangye/vhostioat/dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf_ptype.h:
+../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf_ptype.h:
 
 lib/netdev-dpdk.h:
 

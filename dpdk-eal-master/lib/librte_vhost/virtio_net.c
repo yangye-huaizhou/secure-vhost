@@ -851,12 +851,12 @@ virtio_dev_merge_rx(struct virtio_net *dev, uint16_t queue_id,
 	struct rte_mbuf **pkts, uint32_t count)
 {
 	struct vring_elem *vq;
-	vq=dev->vhost_vq[0]->vring;
+	vq=dev->vhost_vq[queue_id]->vring;
 	uint32_t i = 0;
 	int free_entries;
 	//uint64_t current_eq_idx=*(dev->current_eq_idx);
-	uint64_t tail=dev->vhost_vq[0]->tail;
-	uint64_t head=dev->vhost_vq[0]->head;
+	uint64_t tail=dev->vhost_vq[queue_id]->tail;
+	uint64_t head=dev->vhost_vq[queue_id]->head;
 
 	if(vq[tail%MAX_VRING_SIZE].flag==1)
 		return 0;
@@ -877,17 +877,17 @@ virtio_dev_merge_rx(struct virtio_net *dev, uint16_t queue_id,
 	
 	for (i=0;i<count;i++)
     {
-        vq[(dev->vhost_vq[0]->tail)%MAX_VRING_SIZE].addr=(uint64_t)pkts[i];
+        vq[(dev->vhost_vq[queue_id]->tail)%MAX_VRING_SIZE].addr=(uint64_t)pkts[i];
         //barrier();
         rte_smp_wmb();  //此处内存屏障意义在于必须先读完当前项的值，才能将其flag置0
-        vq[(dev->vhost_vq[0]->tail)%MAX_VRING_SIZE].flag=1;
-        if((dev->vhost_vq[0]->tail)<MAX_VRING_SIZE)
+        vq[(dev->vhost_vq[queue_id]->tail)%MAX_VRING_SIZE].flag=1;
+        if((dev->vhost_vq[queue_id]->tail)<MAX_VRING_SIZE)
         {
-            dev->vhost_vq[0]->tail+=1;
+            dev->vhost_vq[queue_id]->tail+=1;
         }
         else
         {
-            dev->vhost_vq[0]->tail=1;
+            dev->vhost_vq[queue_id]->tail=1;
         }
     }
 	

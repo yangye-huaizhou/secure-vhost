@@ -1031,33 +1031,36 @@ static int vhost_virtqueue_start(struct vhost_dev *dev,
     struct VirtQueue *vvq = virtio_get_queue(vdev, idx);
 
 	//////////////////////////////////////////////////////////////////////if null,return
+	if(idx >= dev->vq_num)
+		dev->vq_num = idx + 1;
 
-    dev->virtio_vq[idx]=NULL;
-	dev->virtio_vq[idx]=malloc(sizeof(struct virtio_virtqueue));
-	if(dev->virtio_vq[idx]==NULL)
+    int iidx = idx % 2;	
+    dev->virtio_vq[iidx]=NULL;
+	dev->virtio_vq[iidx]=malloc(sizeof(struct virtio_virtqueue));
+	if(dev->virtio_vq[iidx]==NULL)
 	{
-		printf("Serious mistake!!!!! dev->virtio_vq[%d]=NULL\n",idx);
+		printf("Serious mistake!!!!! dev->virtio_vq[%d]=NULL\n",iidx);
 	}
-
+    
     vq->num = state.num = virtio_queue_get_num(vdev, idx);
-    dev->virtio_vq[idx]->size=state.num;
-    printf("dev->virtio_vq[%d]->size=%d\n",idx,dev->virtio_vq[idx]->size);
+    dev->virtio_vq[iidx]->size=state.num;
+    printf("dev->virtio_vq[%d]->size=%d\n",idx,dev->virtio_vq[iidx]->size);
 
-	dev->virtio_vq[idx]->shadow_used_ring=NULL;
-	dev->virtio_vq[idx]->batch_copy_elems=NULL;
-	dev->virtio_vq[idx]->shadow_used_ring=malloc(dev->virtio_vq[idx]->size*sizeof(struct vring_used_elem));
-	dev->virtio_vq[idx]->batch_copy_elems=malloc(dev->virtio_vq[idx]->size*sizeof(struct batch_copy_elem));
-	if(dev->virtio_vq[idx]->shadow_used_ring==NULL)
+	dev->virtio_vq[iidx]->shadow_used_ring=NULL;
+	dev->virtio_vq[iidx]->batch_copy_elems=NULL;
+	dev->virtio_vq[iidx]->shadow_used_ring=malloc(dev->virtio_vq[iidx]->size*sizeof(struct vring_used_elem));
+	dev->virtio_vq[iidx]->batch_copy_elems=malloc(dev->virtio_vq[iidx]->size*sizeof(struct batch_copy_elem));
+	if(dev->virtio_vq[iidx]->shadow_used_ring==NULL)
 	{
 		printf("Serious mistake!!!!! dev->virtio_vq[%d]->shadow_used_ring=NULL\n",idx);
 	}
-	if(dev->virtio_vq[idx]->batch_copy_elems==NULL)
+	if(dev->virtio_vq[iidx]->batch_copy_elems==NULL)
 	{
 		printf("Serious mistake!!!!! dev->virtio_vq[%d]->batch_copy_elems=NULL\n",idx);
 	}
 	
 	//printf("vq[%d]->num=%d\n",idx,vq->num);
-	if (!dev->virtio_vq[idx]->shadow_used_ring) {
+	if (!dev->virtio_vq[iidx]->shadow_used_ring) {
 		return -errno;
 	}
     //printf("vq->num=%d\n",vq->num);
@@ -1068,8 +1071,8 @@ static int vhost_virtqueue_start(struct vhost_dev *dev,
     }
 
     state.num = virtio_queue_get_last_avail_idx(vdev, idx);
-	dev->virtio_vq[idx]->last_used_idx=state.num;
-	dev->virtio_vq[idx]->last_avail_idx=state.num;
+	dev->virtio_vq[iidx]->last_used_idx=state.num;
+	dev->virtio_vq[iidx]->last_avail_idx=state.num;
     r = dev->vhost_ops->vhost_set_vring_base(dev, &state);
     if (r) {
         VHOST_OPS_DEBUG("vhost_set_vring_base failed");
@@ -1107,10 +1110,10 @@ static int vhost_virtqueue_start(struct vhost_dev *dev,
         goto fail_alloc_used;
     }
 
-	dev->virtio_vq[idx]->desc = (uint64_t)(unsigned long)vq->desc;
-    dev->virtio_vq[idx]->avail = (uint64_t)(unsigned long)vq->avail;
-    dev->virtio_vq[idx]->used = (uint64_t)(unsigned long)vq->used;
-    dev->virtio_vq[idx]->log_guest_addr = vq->used_phys;
+	dev->virtio_vq[iidx]->desc = (uint64_t)(unsigned long)vq->desc;
+    dev->virtio_vq[iidx]->avail = (uint64_t)(unsigned long)vq->avail;
+    dev->virtio_vq[iidx]->used = (uint64_t)(unsigned long)vq->used;
+    dev->virtio_vq[iidx]->log_guest_addr = vq->used_phys;
     r = vhost_virtqueue_set_addr(dev, vq, vhost_vq_index, dev->log_enabled);
     if (r < 0) {
         r = -errno;
@@ -1118,7 +1121,7 @@ static int vhost_virtqueue_start(struct vhost_dev *dev,
     }
 
     file.fd = event_notifier_get_fd(virtio_queue_get_host_notifier(vvq));
-	dev->virtio_vq[idx]->kickfd=file.fd;
+	dev->virtio_vq[iidx]->kickfd=file.fd;
 	printf("kickfd=%d\n",file.fd);
     r = dev->vhost_ops->vhost_set_vring_kick(dev, &file);
     if (r) {
@@ -1182,11 +1185,11 @@ static void vhost_virtqueue_stop(struct vhost_dev *dev,
     //if (dev->virtio_vq[idx]->kickfd >= 0)
 	//	close(dev->virtio_vq[idx]->kickfd);
 
-	free(dev->virtio_vq[idx]->shadow_used_ring);
-	dev->virtio_vq[idx]->shadow_used_ring = NULL;
+	free(dev->virtio_vq[idx % 2]->shadow_used_ring);
+	dev->virtio_vq[idx % 2]->shadow_used_ring = NULL;
 
-	free(dev->virtio_vq[idx]->batch_copy_elems);
-	dev->virtio_vq[idx]->batch_copy_elems = NULL;
+	free(dev->virtio_vq[idx % 2]->batch_copy_elems);
+	dev->virtio_vq[idx % 2]->batch_copy_elems = NULL;
 
 	//vq->kickfd = VIRTIO_UNINITIALIZED_EVENTFD;
 
@@ -1522,7 +1525,7 @@ void vhost_virtqueue_mask(struct vhost_dev *hdev, VirtIODevice *vdev, int n,
     }
 
     file.index = hdev->vhost_ops->vhost_get_vq_index(hdev, n);
-    hdev->virtio_vq[file.index]->callfd=file.fd;
+    hdev->virtio_vq[file.index % 2]->callfd=file.fd;
 	printf("callfd=%d\n",file.fd);
     r = hdev->vhost_ops->vhost_set_vring_call(hdev, &file);
     if (r < 0) {
@@ -1635,14 +1638,17 @@ int vhost_dev_start(struct vhost_dev *hdev, VirtIODevice *vdev)
     CPU_SET(globalcore,&mask);
     pthread_attr_setaffinity_np(&attr,sizeof(mask),&mask);
 
-    int error = pthread_create(&(hdev->ntid), &attr, packet_process_burst, NULL);
-	
-    if(error!=0)
+    static int is_init;
+    if(is_init == 0)
     {
-        printf("can't create thread\n");
-        goto fail_log;
+	int error = pthread_create(&(hdev->ntid), &attr, packet_process_burst, NULL);
+	is_init = 1;
+    	if(error!=0)
+    	{
+            printf("can't create thread\n");
+            goto fail_log;
+    	}
     }
-
     pthread_attr_destroy(&attr);
 
 /*    

@@ -262,8 +262,8 @@ struct virtio_net {
 	int			dequeue_zero_copy;
 	//struct vring_elem *vring[2];
 	
-	struct vhost_vring *vhost_vq[2];
-	struct rte_ring *vhost_vring[2];
+	struct vhost_vring *vhost_vq[VHOST_MAX_QUEUE_PAIRS * 2];
+	struct rte_ring *vhost_vring[VHOST_MAX_QUEUE_PAIRS * 2];
 	
 	struct vhost_virtqueue	*virtqueue[VHOST_MAX_QUEUE_PAIRS * 2];
 #define IF_NAME_SZ (PATH_MAX > IFNAMSIZ ? PATH_MAX : IFNAMSIZ)

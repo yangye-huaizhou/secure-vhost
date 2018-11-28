@@ -321,11 +321,11 @@ am__append_50 = $(HSTAMP_FILES)
 # that #includes all the public headers, as a way to ensure that they
 # are acceptable as C++.
 #am__append_51 = include/openvswitch/libcxxtest.la
-am__append_52 = vswitchd/vswitch.gv vswitchd/vswitch.pic
-am__append_53 = vtep/vtep.gv vtep/vtep.pic
+#am__append_52 = vswitchd/vswitch.gv vswitchd/vswitch.pic
+#am__append_53 = vtep/vtep.gv vtep/vtep.pic
 #am__append_54 = $(srcdir)/datapath-windows/include/OvsDpInterface.h
-am__append_55 = ovn/ovn-sb.gv ovn/ovn-sb.pic
-am__append_56 = ovn/ovn-nb.gv ovn/ovn-nb.pic
+#am__append_55 = ovn/ovn-sb.gv ovn/ovn-sb.pic
+#am__append_56 = ovn/ovn-nb.gv ovn/ovn-nb.pic
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/absolute-header.m4 \
@@ -1576,14 +1576,14 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/lyz/multi/openvswitch-2.9.2/build-aux/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing autoheader
-AUTOM4TE = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing autom4te
-AUTOMAKE = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing automake-1.15
+AUTOCONF = ${SHELL} /home/lyz/multi/openvswitch-2.9.2/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/lyz/multi/openvswitch-2.9.2/build-aux/missing autoheader
+AUTOM4TE = ${SHELL} /home/lyz/multi/openvswitch-2.9.2/build-aux/missing autom4te
+AUTOMAKE = ${SHELL} /home/lyz/multi/openvswitch-2.9.2/build-aux/missing automake-1.15
 AWK = gawk
 CAPNG_LDADD = 
 CC = $(if $(C:0=),env REAL_CC="gcc" CHECK="$(SPARSE) $(SPARSE_WERROR) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc)
@@ -1641,7 +1641,7 @@ LT_AGE = 0
 LT_CURRENT = 0
 LT_REVISION = 0
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /home/lyz/multi/openvswitch-2.9.2/build-aux/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 MSVC64_LDFLAGS = 
@@ -1698,10 +1698,10 @@ STRIP = strip
 VERSION = 2.9.2
 VSTUDIO_CONFIG = 
 WARNING_FLAGS =  -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -mssse3
-abs_builddir = /home/yangye/secure-vhost/openvswitch-2.9.2
-abs_srcdir = /home/yangye/secure-vhost/openvswitch-2.9.2
-abs_top_builddir = /home/yangye/secure-vhost/openvswitch-2.9.2
-abs_top_srcdir = /home/yangye/secure-vhost/openvswitch-2.9.2
+abs_builddir = /home/lyz/multi/openvswitch-2.9.2
+abs_srcdir = /home/lyz/multi/openvswitch-2.9.2
+abs_top_builddir = /home/lyz/multi/openvswitch-2.9.2
+abs_top_srcdir = /home/lyz/multi/openvswitch-2.9.2
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -1731,7 +1731,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/install-sh
+install_sh = ${SHELL} /home/lyz/multi/openvswitch-2.9.2/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -2992,8 +2992,8 @@ vswitchd_ovs_vswitchd_LDADD = \
 	lib/libopenvswitch.la
 
 vswitchd_ovs_vswitchd_LDFLAGS = $(AM_LDFLAGS) $(DPDK_vswitchd_LDFLAGS)
-VSWITCH_PIC = vswitchd/vswitch.pic
-VSWITCH_DOT_DIAGRAM_ARG = --er-diagram=$(VSWITCH_PIC)
+#VSWITCH_PIC = vswitchd/vswitch.pic
+#VSWITCH_DOT_DIAGRAM_ARG = --er-diagram=$(VSWITCH_PIC)
 ovsdb_libovsdb_la_LDFLAGS = \
         $(OVS_LTINFO) \
         -Wl,--version-script=$(top_builddir)/ovsdb/libovsdb.sym \
@@ -3123,13 +3123,13 @@ nodist_vtep_libvtep_la_SOURCES = \
 
 vtep_vtep_ctl_SOURCES = vtep/vtep-ctl.c
 vtep_vtep_ctl_LDADD = vtep/libvtep.la lib/libopenvswitch.la
-VTEP_PIC = vtep/vtep.pic
-VTEP_DOT_DIAGRAM_ARG = --er-diagram=$(VTEP_PIC)
+#VTEP_PIC = vtep/vtep.pic
+#VTEP_DOT_DIAGRAM_ARG = --er-diagram=$(VTEP_PIC)
 PTHREAD_TEMP_DIR = `echo "$(PTHREAD_LDFLAGS)" | sed 's|^.\(.*\).$:\1||'`
-OVN_SB_PIC = ovn/ovn-sb.pic
-OVN_SB_DOT_DIAGRAM_ARG = --er-diagram=$(OVN_SB_PIC)
-OVN_NB_PIC = ovn/ovn-nb.pic
-OVN_NB_DOT_DIAGRAM_ARG = --er-diagram=$(OVN_NB_PIC)
+#OVN_SB_PIC = ovn/ovn-sb.pic
+#OVN_SB_DOT_DIAGRAM_ARG = --er-diagram=$(OVN_SB_PIC)
+#OVN_NB_PIC = ovn/ovn-nb.pic
+#OVN_NB_DOT_DIAGRAM_ARG = --er-diagram=$(OVN_NB_PIC)
 ovn_controller_ovn_controller_SOURCES = \
 	ovn/controller/bfd.c \
 	ovn/controller/bfd.h \
@@ -6853,11 +6853,11 @@ $(srcdir)/debian/copyright: AUTHORS.rst debian/copyright.in
 #
 # If "python" or "dot" is not available, then we do not add graphical diagram
 # to the documentation.
-vswitchd/vswitch.gv: ovsdb/ovsdb-dot.in vswitchd/vswitch.ovsschema
-	$(AM_V_GEN)$(OVSDB_DOT) --no-arrows $(srcdir)/vswitchd/vswitch.ovsschema > $@
-vswitchd/vswitch.pic: vswitchd/vswitch.gv ovsdb/dot2pic
-	$(AM_V_GEN)(dot -T plain < vswitchd/vswitch.gv | $(PYTHON) $(srcdir)/ovsdb/dot2pic -f 3) > $@.tmp && \
-	mv $@.tmp $@
+#vswitchd/vswitch.gv: ovsdb/ovsdb-dot.in vswitchd/vswitch.ovsschema
+#	$(AM_V_GEN)$(OVSDB_DOT) --no-arrows $(srcdir)/vswitchd/vswitch.ovsschema > $@
+#vswitchd/vswitch.pic: vswitchd/vswitch.gv ovsdb/dot2pic
+#	$(AM_V_GEN)(dot -T plain < vswitchd/vswitch.gv | $(PYTHON) $(srcdir)/ovsdb/dot2pic -f 3) > $@.tmp && \
+#	mv $@.tmp $@
 vswitchd/ovs-vswitchd.conf.db.5: \
 	ovsdb/ovsdb-doc vswitchd/vswitch.xml vswitchd/vswitch.ovsschema \
 	$(VSWITCH_PIC)
@@ -6985,11 +6985,11 @@ vtep/vtep-idl.ovsidl: $(VTEP_IDL_FILES)
 #
 # If "python" or "dot" is not available, then we do not add graphical diagram
 # to the documentation.
-vtep/vtep.gv: ovsdb/ovsdb-dot.in vtep/vtep.ovsschema
-	$(AM_V_GEN)$(OVSDB_DOT) --no-arrows $(srcdir)/vtep/vtep.ovsschema > $@
-vtep/vtep.pic: vtep/vtep.gv ovsdb/dot2pic
-	$(AM_V_GEN)(dot -T plain < vtep/vtep.gv | $(PYTHON) $(srcdir)/ovsdb/dot2pic -f 3) > $@.tmp && \
-	mv $@.tmp $@
+#vtep/vtep.gv: ovsdb/ovsdb-dot.in vtep/vtep.ovsschema
+#	$(AM_V_GEN)$(OVSDB_DOT) --no-arrows $(srcdir)/vtep/vtep.ovsschema > $@
+#vtep/vtep.pic: vtep/vtep.gv ovsdb/dot2pic
+#	$(AM_V_GEN)(dot -T plain < vtep/vtep.gv | $(PYTHON) $(srcdir)/ovsdb/dot2pic -f 3) > $@.tmp && \
+#	mv $@.tmp $@
 vtep/vtep.5: \
 	ovsdb/ovsdb-doc vtep/vtep.xml $(srcdir)/vtep/vtep.ovsschema $(VTEP_PIC)
 	$(AM_V_GEN)$(OVSDB_DOC) \
@@ -7037,11 +7037,11 @@ windows_installer: all
 #
 # If "python" or "dot" is not available, then we do not add graphical diagram
 # to the documentation.
-ovn/ovn-sb.gv: ovsdb/ovsdb-dot.in ovn/ovn-sb.ovsschema
-	$(AM_V_GEN)$(OVSDB_DOT) --no-arrows $(srcdir)/ovn/ovn-sb.ovsschema > $@
-ovn/ovn-sb.pic: ovn/ovn-sb.gv ovsdb/dot2pic
-	$(AM_V_GEN)(dot -T plain < ovn/ovn-sb.gv | $(PYTHON) $(srcdir)/ovsdb/dot2pic -f 3) > $@.tmp && \
-	mv $@.tmp $@
+#ovn/ovn-sb.gv: ovsdb/ovsdb-dot.in ovn/ovn-sb.ovsschema
+#	$(AM_V_GEN)$(OVSDB_DOT) --no-arrows $(srcdir)/ovn/ovn-sb.ovsschema > $@
+#ovn/ovn-sb.pic: ovn/ovn-sb.gv ovsdb/dot2pic
+#	$(AM_V_GEN)(dot -T plain < ovn/ovn-sb.gv | $(PYTHON) $(srcdir)/ovsdb/dot2pic -f 3) > $@.tmp && \
+#	mv $@.tmp $@
 ovn/ovn-sb.5: \
 	ovsdb/ovsdb-doc ovn/ovn-sb.xml ovn/ovn-sb.ovsschema $(OVN_SB_PIC)
 	$(AM_V_GEN)$(OVSDB_DOC) \
@@ -7055,11 +7055,11 @@ ovn/ovn-sb.5: \
 #
 # If "python" or "dot" is not available, then we do not add graphical diagram
 # to the documentation.
-ovn/ovn-nb.gv: ovsdb/ovsdb-dot.in ovn/ovn-nb.ovsschema
-	$(AM_V_GEN)$(OVSDB_DOT) --no-arrows $(srcdir)/ovn/ovn-nb.ovsschema > $@
-ovn/ovn-nb.pic: ovn/ovn-nb.gv ovsdb/dot2pic
-	$(AM_V_GEN)(dot -T plain < ovn/ovn-nb.gv | $(PYTHON) $(srcdir)/ovsdb/dot2pic -f 3) > $@.tmp && \
-	mv $@.tmp $@
+#ovn/ovn-nb.gv: ovsdb/ovsdb-dot.in ovn/ovn-nb.ovsschema
+#	$(AM_V_GEN)$(OVSDB_DOT) --no-arrows $(srcdir)/ovn/ovn-nb.ovsschema > $@
+#ovn/ovn-nb.pic: ovn/ovn-nb.gv ovsdb/dot2pic
+#	$(AM_V_GEN)(dot -T plain < ovn/ovn-nb.gv | $(PYTHON) $(srcdir)/ovsdb/dot2pic -f 3) > $@.tmp && \
+#	mv $@.tmp $@
 ovn/ovn-nb.5: \
 	ovsdb/ovsdb-doc ovn/ovn-nb.xml ovn/ovn-nb.ovsschema $(OVN_NB_PIC)
 	$(AM_V_GEN)$(OVSDB_DOC) \

@@ -1,0 +1,1 @@
+cmd_pmdinfogen.o = gcc -Wp,-MD,./.pmdinfogen.o.d.tmp   -g -I/home/lyz/multi/dpdk-eal-master/x86_64-native-linuxapp-gcc/include    -o pmdinfogen.o -c /home/lyz/multi/dpdk-eal-master/buildtools/pmdinfogen/pmdinfogen.c 

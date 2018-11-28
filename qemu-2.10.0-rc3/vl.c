@@ -3238,7 +3238,7 @@ int main(int argc, char **argv, char **envp)
 	if (spdk_env_init(&spdkopts) < 0) {
 		return -1;
 	}
-
+/*
 	if (ioat_init() != 0) {
 		goto ioat_cleanup;
 	}
@@ -3249,7 +3249,7 @@ int main(int argc, char **argv, char **envp)
 	}
 	g_next_device = TAILQ_FIRST(&g_devices);
         global_ioat=g_next_device->ioat;
-
+*/
     //if ((retval = rte_eal_init(argc, argv)) < 0)
     //    return -1;
 
@@ -5031,8 +5031,8 @@ int main(int argc, char **argv, char **envp)
     monitor_cleanup();
     qemu_chr_cleanup();
     /* TODO: unref root container, check all devices are ok */
-ioat_cleanup:
-	ioat_exit();
+//ioat_cleanup:
+//	ioat_exit();
 
     return 0;
 }

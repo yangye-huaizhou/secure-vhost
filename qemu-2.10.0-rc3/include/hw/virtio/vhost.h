@@ -76,6 +76,9 @@ struct vhost_iommu {
 };
 
 struct vhost_memory;
+
+#define VHOST_MAX_QUEUE_PAIRS 0x80
+
 struct vhost_dev {
     VirtIODevice *vdev;
     MemoryListener memory_listener;
@@ -92,6 +95,7 @@ struct vhost_dev {
 	struct vhost_vring *vhost_vq[2];
 	struct virtio_virtqueue *virtio_vq[2];
 	struct rte_ring *vhost_vring[2];
+	int vq_num;
 	uint16_t vhost_hlen;
     /* the first virtqueue which would be used by this vhost dev */
     int vq_index;

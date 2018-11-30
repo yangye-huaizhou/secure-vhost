@@ -2514,6 +2514,11 @@ static inline int vdev_enqueue(struct vhost_dev *hdev,uint16_t count)
 
 void *packet_process_burst(void *arg)
 {
+	struct vhost_dev *hdev;
+	QLIST_FOREACH(hdev, &vhost_devices, entry)
+	{
+		printf("111");
+	}	
         pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
         pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
         pthread_detach(pthread_self());
@@ -2527,7 +2532,6 @@ void *packet_process_burst(void *arg)
         //    exit(1); 
         //}
 	printf("copy thread %d running\n",syscall(SYS_gettid));
-        struct vhost_dev *hdev;
 	uint16_t count_eq;
 	uint16_t count_dq;
 	uint16_t sleep_time;
@@ -2535,6 +2539,11 @@ void *packet_process_burst(void *arg)
 	static uint16_t last_count_dq = 0;
 	uint16_t enqueue_waittime = 0;
 	uint16_t dequeue_waittime = 0;
+        
+        QLIST_FOREACH(hdev, &vhost_devices, entry)
+        {    
+                printf("111");
+        }
         while(1)
         {
 		//sched_yield();
@@ -2573,11 +2582,12 @@ void *packet_process_burst(void *arg)
                                 }
 
                         }
+			yield:     
+               		 //sched_yield();
+                	pthread_testcancel();
+                	//sched_yield();
+
                 }
-	yield:                             
-		//sched_yield();
-                pthread_testcancel();
-		//sched_yield();
         }
         return NULL;
 }

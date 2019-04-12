@@ -28,6 +28,10 @@
 #include <linux/virtio_net.h>
 #include <sys/syscall.h>
 
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/prctl.h>
+
 #include <pthread.h>
 
 
@@ -594,7 +598,7 @@ static int vhost_user_get_vring_addr(struct vhost_dev *dev,
     //}
     //printf("0x%16x\n",mmap_addr);
 	//char*ring_name=msg.payload.vring_name;
-	dev->vhost_vring[addr->index]=rte_ring_lookup(msg.payload.vring_name);			
+	dev->vhost_vring[addr->index % 2]=rte_ring_lookup(msg.payload.vring_name);			
 	//dev->vhost_vq[addr->index]=(struct vhost_vring*)mmap_addr;
 	//printf("0x%16x\n",dev->vhost_vq);
 	//dev->vhost_vq[1]=(struct vhost_vring*)(mmap_addr+4096);
@@ -2360,9 +2364,9 @@ static inline int find_enqueuenum(struct vhost_dev *hdev)
 		vi_vq->last_avail_idx;
     //printf("%u %u\n",free_vh_entries,free_vi_entries);
 /*
-	if(counts==100000)
+	if(counts==10000000)
 	{
-		printf("--------------------------");
+		printf("--------------------------\n");
 		for(int i=0;i<257;i++)
 		{
 			printf("%u %u\n", enqueue_num[0][i],enqueue_num[1][i]);
@@ -2517,6 +2521,7 @@ void *packet_process_burst(void *arg)
         pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
         pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
         pthread_detach(pthread_self());
+        //prctl(PR_SET_NAME,"packet");
         //struct sched_param param; 
         //int maxpri; 
         //maxpri = 50;
@@ -2527,7 +2532,7 @@ void *packet_process_burst(void *arg)
         //    exit(1); 
         //}
 	printf("copy thread %d running\n",syscall(SYS_gettid));
-        struct vhost_dev *hdev;
+        struct vhost_dev *hdev=arg;
 	uint16_t count_eq;
 	uint16_t count_dq;
 	uint16_t sleep_time;
@@ -2535,14 +2540,44 @@ void *packet_process_burst(void *arg)
 	static uint16_t last_count_dq = 0;
 	uint16_t enqueue_waittime = 0;
 	uint16_t dequeue_waittime = 0;
+        /*pthread_mutex_t *mptr;
+       pthread_mutexattr_t mattr;
+       key_t key_id = ftok(".",1);
+       int shmid = shmget(key_id,sizeof(pthread_mutex_t) + sizeof(int),IPC_CREAT |  0644);
+       mptr = shmat(shmid,NULL,0);*/
+       //mptr=mmap(0,sizeof(pthread_mutex_t)+sizeof(int),PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
+      /* int *val = (int *)(mptr + 1);
+       //printf("%d",*val);
+       if(*val == 0)
+       {
+            //printf("111");
+            *val = 1;
+            pthread_mutexattr_init(&mattr);
+            pthread_mutexattr_setpshared(&mattr,PTHREAD_PROCESS_SHARED);
+            pthread_mutex_init(mptr,&mattr);
+       }*/
+        
+
         while(1)
         {
 		//sched_yield();
-                QLIST_FOREACH(hdev, &vhost_devices, entry)
-                {
+                //QLIST_FOREACH(hdev, &vhost_devices, entry)
+                //{
+                //pthread_mutex_lock(mptr);
                         if(hdev->ready==1)
                         {
+/*
+                                int i;
+                                int count=MAX_PKT_BURST;
+                                int free_dq_entries=rte_ring_free_count(hdev->vhost_vring[1]);
+                                int free_eq_entries=rte_ring_count(hdev->vhost_vring[0]);
+                                void *pkts[MAX_PKT_BURST];
+                                count=MIN(count,free_dq_entries);
+                                count=MIN(count,free_eq_entries);
+                                rte_ring_sc_dequeue_burst(hdev->vhost_vring[0],(void **)pkts,count,NULL);
+                                rte_ring_sp_enqueue_burst(hdev->vhost_vring[1],(void **)pkts,count,NULL);
 
+*/
 
                                 count_eq=find_enqueuenum(hdev);
                                 count_dq=find_dequeuenum(hdev);
@@ -2561,75 +2596,70 @@ void *packet_process_burst(void *arg)
                                         vdev_dequeue(hdev,count_dq);
                                 }
 
-/*
-				sleep_time = MAX_STIME - RTE_MAX(count_dq - last_count_dq,count_eq - last_count_eq);
-							if(sleep_time > 0)
-							{
-								usleep(sleep_time);
-								enqueue_waittime += sleep_time;
-								dequeue_waittime += sleep_time;
-							}
-							if(count_eq == MAX_PKT_BURST)
-							{
-								enqueue_waittime = 0;
-							    if(count_dq == MAX_PKT_BURST)
-							    	dequeue_waittime = 0;
-								else
-									dequeue_waittime += MAX_STIME;
-							}
-                            else if(count_dq == MAX_PKT_BURST)
-                            {
-							    enqueue_waittime += MAX_STIME;
-							    dequeue_waittime = 0;
-                            }
-							if(count_eq == MAX_PKT_BURST)
-							{
-								vdev_enqueue(hdev,count_eq);
-								last_count_eq = 0;
-							}
-							else
-							{
-								if(enqueue_waittime >= DRAIN_TIME)
-								{
-									if(count_eq > 0)
-										vdev_enqueue(hdev,count_eq);
-									last_count_eq = 0;
-								}
-								else
-									last_count_eq = count_eq;
-							}
-							if(count_dq == MAX_PKT_BURST)
-							{
-								vdev_dequeue(hdev,count_dq);
-								last_count_dq = 0;
-							}
-							else
-							{
-								if(dequeue_waittime >= DRAIN_TIME)
-								{
-									if(count_dq > 0)
-										vdev_dequeue(hdev,count_dq);
-									last_count_dq = 0;
-								}
-								else
-									last_count_dq = count_dq;
-							}
-                            //count_dq=vdev_dequeue(hdev);
-                            //count_eq=vdev_enqueue(hdev);
-                            //printf("count_dp=%d\n",count_dq);
-                            //printf("count_ep=%d\n",count_eq);
-
-*/
                         }
-                }
+                //}
 	yield:                             
 		//sched_yield();
                 pthread_testcancel();
+                //pthread_mutex_unlock(mptr);
 		sched_yield();
         }
         return NULL;
 }
 
+/*
+void *packet_process_burst_enqueue(void *arg)
+{
+        pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+        pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
+        pthread_detach(pthread_self());
+        printf("copy thread %d running\n",syscall(SYS_gettid));
+        struct vhost_dev *hdev=arg;
+        uint16_t count_eq;
+        while(1)
+        {
+                //sched_yield();
+                //QLIST_FOREACH(hdev, &vhost_devices, entry)
+                //{
+                        if(likely(hdev->ready==1))
+                        {
+                                count_eq=find_enqueuenum(hdev);
+                                if(count_eq!=0)
+                                {
+                                        vdev_enqueue(hdev,count_eq);
+				}
+			}
+			pthread_testcancel();
+	}
+	return NULL;
+}
+
+void * packet_process_burst_dequeue(void *arg)
+{
+        pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+        pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
+        pthread_detach(pthread_self());
+        printf("copy thread %d running\n",syscall(SYS_gettid));
+        struct vhost_dev *hdev=arg;
+        uint16_t count_dq;
+        while(1)
+        {
+                //sched_yield();
+                //QLIST_FOREACH(hdev, &vhost_devices, entry)
+                //{
+                        if(likely(hdev->ready==1))
+                        {
+                                count_dq=find_dequeuenum(hdev);
+                                if(count_dq!=0)
+                                {
+                                        vdev_dequeue(hdev,count_dq);
+                                }
+                        }
+                        pthread_testcancel();
+        }
+        return NULL;
+}
+*/
 const VhostOps user_ops = {
         .backend_type = VHOST_BACKEND_TYPE_USER,
         .vhost_backend_init = vhost_user_init,

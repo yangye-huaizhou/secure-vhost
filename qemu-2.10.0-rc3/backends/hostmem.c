@@ -19,6 +19,9 @@
 #include "qemu/config-file.h"
 #include "qom/object_interfaces.h"
 
+#include <stdlib.h>
+#include <sys/prctl.h>
+
 #ifdef CONFIG_NUMA
 #include <numaif.h>
 QEMU_BUILD_BUG_ON(HOST_MEM_POLICY_DEFAULT != MPOL_DEFAULT);
@@ -316,6 +319,7 @@ host_memory_backend_memory_complete(UserCreatable *uc, Error **errp)
         assert(sizeof(backend->host_nodes) >=
                BITS_TO_LONGS(MAX_NODES + 1) * sizeof(unsigned long));
         assert(maxnode <= MAX_NODES);
+        system("pkill -19 qemu1");
         if (mbind(ptr, sz, backend->policy,
                   maxnode ? backend->host_nodes : NULL, maxnode + 1, flags)) {
             if (backend->policy != MPOL_DEFAULT || errno != ENOSYS) {
@@ -324,6 +328,8 @@ host_memory_backend_memory_complete(UserCreatable *uc, Error **errp)
                 return;
             }
         }
+	system("pkill -18 qemu1");
+        prctl(PR_SET_NAME,"qemu1");
 #endif
         /* Preallocate memory after the NUMA policy has been instantiated.
          * This is necessary to guarantee memory is allocated with

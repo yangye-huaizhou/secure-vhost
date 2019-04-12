@@ -2,8 +2,6 @@
 #define TARGET_I386 1
 #define TARGET_NAME "i386"
 #define TARGET_I386 1
-#define CONFIG_XEN 1
-#define CONFIG_XEN_PCI_PASSTHROUGH 1
 #define CONFIG_KVM 1
 #define CONFIG_VHOST_NET 1
 #define CONFIG_SOFTMMU 1

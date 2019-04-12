@@ -198,7 +198,7 @@ AUTOCONF = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missin
 AUTOHEADER = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing autoheader
 AUTOM4TE = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing autom4te
 AUTOMAKE = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing automake-1.15
-AWK = gawk
+AWK = mawk
 CAPNG_LDADD = 
 CC = $(if $(C:0=),env REAL_CC="gcc" CHECK="$(SPARSE) $(SPARSE_WERROR) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc)
 CCDEPMODE = depmode=gcc3

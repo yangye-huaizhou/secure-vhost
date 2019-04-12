@@ -1622,20 +1622,30 @@ int vhost_dev_start(struct vhost_dev *hdev, VirtIODevice *vdev)
         }
     }
     //printf("2222222222222\n");
-
     pthread_attr_t attr;
     pthread_attr_init(&attr);
-    pthread_attr_setschedpolicy(&attr,SCHED_FIFO);
-    struct sched_param param;
-    param.sched_priority=30;
-    pthread_attr_setschedparam(&attr,&param);
-    pthread_attr_setinheritsched(&attr,PTHREAD_EXPLICIT_SCHED);
+
+    //pthread_attr_setschedpolicy(&attr,SCHED_FIFO);
+    //struct sched_param param;
+    //param.sched_priority=10;
+    //pthread_attr_setschedparam(&attr,&param);
+    //pthread_attr_setinheritsched(&attr,PTHREAD_EXPLICIT_SCHED);
+
     cpu_set_t mask;
     CPU_ZERO(&mask);
-    CPU_SET(globalcore,&mask);
+    CPU_SET(globalcore,&mask);  
+    //CPU_SET(6,&mask);
     pthread_attr_setaffinity_np(&attr,sizeof(mask),&mask);
 
-    int error = pthread_create(&(hdev->ntid), &attr, packet_process_burst, NULL);
+    int error = pthread_create(&(hdev->ntid), &attr, packet_process_burst, hdev);
+//    globalcore+=1;
+ /*
+    CPU_ZERO(&mask);
+    CPU_SET(7,&mask);
+    pthread_attr_setaffinity_np(&attr,sizeof(mask),&mask);
+    error = pthread_create(&(hdev->ntid[1]), &attr, packet_process_burst_dequeue, hdev);
+*/
+
 	
     if(error!=0)
     {
@@ -1644,9 +1654,8 @@ int vhost_dev_start(struct vhost_dev *hdev, VirtIODevice *vdev)
     }
 
     pthread_attr_destroy(&attr);
-
-/*    
-    int error = pthread_create(&(hdev->ntid), NULL, packet_process_burst, NULL);
+    
+    /*int error = pthread_create(&(hdev->ntid), NULL, packet_process_burst, NULL);
 	
     if(error!=0)
     {
@@ -1655,13 +1664,12 @@ int vhost_dev_start(struct vhost_dev *hdev, VirtIODevice *vdev)
     }
     cpu_set_t mask;
     CPU_ZERO(&mask);
-    CPU_SET(19,&mask);
+    CPU_SET(globalcore,&mask);
     if(pthread_setaffinity_np(hdev->ntid ,sizeof(mask),&mask)==-1)  
     {  
         printf("pthread_setaffinity_np erro\n");  
         goto fail_log;
-    } 
-  */  
+    }   */
 
     hdev->ready=1;
 	
@@ -1697,6 +1705,7 @@ void vhost_dev_stop(struct vhost_dev *hdev, VirtIODevice *vdev)
     //pthread_kill(hdev->ntid,SIGKILL);
     //pthread_cancel(hdev->ntid[0]);
     pthread_cancel(hdev->ntid);
+    //pthread_cancel(hdev->ntid[1]);
 	//pthread_join(hdev->ntid,&status);
 	for (i = 0; i < hdev->nvqs; ++i) {
         vhost_virtqueue_stop(hdev,

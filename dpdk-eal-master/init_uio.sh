@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEVICE="0000:01:00.0 0000:01:00.1"
+DEVICE="0000:89:00.0 0000:89:00.1"
 DRIVER="igb_uio"
 
 while getopts ":hd:r:" optname

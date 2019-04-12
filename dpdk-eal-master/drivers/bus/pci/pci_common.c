@@ -271,8 +271,10 @@ pci_probe_all_drivers(struct rte_pci_device *dev)
 	int rc = 0;
 
 	if (dev == NULL)
+	{
+		RTE_LOG(WARNING, EAL, "dev=null!!!!");
 		return -1;
-
+	}
 	/* Check if a driver is already loaded */
 	if (dev->driver != NULL)
 		return 0;
@@ -280,8 +282,11 @@ pci_probe_all_drivers(struct rte_pci_device *dev)
 	FOREACH_DRIVER_ON_PCIBUS(dr) {
 		rc = rte_pci_probe_one_driver(dr, dev);
 		if (rc < 0)
+		{
+			RTE_LOG(WARNING, EAL, "rc<0");
 			/* negative value is an error */
 			return -1;
+		}
 		if (rc > 0)
 			/* positive value means driver doesn't support it */
 			continue;

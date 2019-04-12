@@ -61,7 +61,7 @@
 
 
 #define MAX_VRING_NAME 32
-#define MAX_VRING_SIZE 256
+#define MAX_VRING_SIZE 64
 
 /**
  * Structure contains buffer address, length and descriptor index

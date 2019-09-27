@@ -1,2 +1,4 @@
 #export EXTRA_CFLAGS='-ggdb -O0'
-make install -j 16 T=$RTE_TARGET DESTDIR=install
+make config T=$RTE_TARGET
+make -j 16
+make install DESTDIR=install

@@ -182,9 +182,7 @@ int vhost_device_iotlb_miss(struct vhost_dev *dev, uint64_t iova, int write);
 
 void *packet_process_burst(void *arg);
 //void *packet_process_send_burst(void *arg);
-//void *packet_process_burst_enqueue(void *arg);
 
-//void *packet_process_burst_dequeue(void *arg);
 //void *packet_process_receive_burst(void *arg);
 
 //int vdev_dequeue(struct vhost_dev *hdev);

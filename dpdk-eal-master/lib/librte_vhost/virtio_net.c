@@ -54,6 +54,10 @@
 
 #define MAX_BATCH_LEN 256
 
+#define BURST_TX_DRAIN_US 100
+
+//const uint64_t drain_tsc = (rte_get_tsc_hz() + US_PER_S - 1) / US_PER_S * BURST_TX_DRAIN_US;
+
 static bool
 is_valid_virt_queue_idx(uint32_t idx, int is_tx, uint32_t nr_vring)
 {
@@ -989,7 +993,7 @@ rte_vhost_enqueue_burst(int vid, uint16_t queue_id,
 	struct rte_mbuf **pkts, uint16_t count)
 {
 	struct virtio_net *dev = get_device(vid);
-
+	
 	if (!dev)
 		return 0;
 
@@ -997,11 +1001,33 @@ rte_vhost_enqueue_burst(int vid, uint16_t queue_id,
 
 	int free_vh_entries=rte_ring_free_count(dev->vhost_vring[queue_id]);
 
+        uint64_t  diff_tsc, cur_tsc;
+        cur_tsc = rte_rdtsc();
+        diff_tsc = cur_tsc - dev->prev_tsc;
+	
+	 if( free_vh_entries < 128 || diff_tsc > ((rte_get_tsc_hz() + US_PER_S - 1) / US_PER_S * BURST_TX_DRAIN_US))
+        {
+                //kill(dev->ppid,SIGUSR1);
+                vhost_user_wake_up(dev);
+                dev->prev_tsc=cur_tsc;
+        }
+
 	if (free_vh_entries==0)
 	{
 		return 0;
 	}
+/*
+	uint64_t  diff_tsc, cur_tsc;
+        cur_tsc = rte_rdtsc();
+        diff_tsc = cur_tsc - dev->prev_tsc;
 
+	if( free_vh_entries < 128 || diff_tsc > ((rte_get_tsc_hz() + US_PER_S - 1) / US_PER_S * BURST_TX_DRAIN_US))
+	{
+		//kill(dev->ppid,SIGUSR1);
+                vhost_user_wake_up(dev);
+                dev->prev_tsc=cur_tsc;
+	}
+*/
 	count = RTE_MIN(count, free_vh_entries);
 	count = RTE_MIN(count, MAX_PKT_BURST);
 	
@@ -1568,12 +1594,33 @@ rte_vhost_dequeue_burst(int vid, uint16_t queue_id,
 
 	int free_vh_entries=rte_ring_count(dev->vhost_vring[queue_id]);
 
+        uint64_t  diff_tsc, cur_tsc;
+        cur_tsc = rte_rdtsc();
+        diff_tsc = cur_tsc - dev->prev_tsc;
+
+        if(diff_tsc > ((rte_get_tsc_hz() + US_PER_S - 1) / US_PER_S * BURST_TX_DRAIN_US))
+        {
+                //kill(dev->ppid,SIGUSR1);
+                vhost_user_wake_up(dev);
+                dev->prev_tsc=cur_tsc;
+        }
+
 	if (free_vh_entries==0)
 	{
 		return 0;
 	}
+/*
+	uint64_t  diff_tsc, cur_tsc;
+        cur_tsc = rte_rdtsc();
+        diff_tsc = cur_tsc - dev->prev_tsc;
 
-	
+        if(diff_tsc > ((rte_get_tsc_hz() + US_PER_S - 1) / US_PER_S * BURST_TX_DRAIN_US))
+        {
+                //kill(dev->ppid,SIGUSR1);
+                vhost_user_wake_up(dev);
+                dev->prev_tsc=cur_tsc;
+        }	
+*/	
 	struct rte_mbuf *rarp_mbuf = NULL;
 
 	count = RTE_MIN(free_vh_entries, MAX_PKT_BURST);

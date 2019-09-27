@@ -7,7 +7,7 @@ TARGET_WORDS_BIGENDIAN=y
 CONFIG_USER_ONLY=y
 CONFIG_QEMU_INTERP_PREFIX="/usr/gnemul/qemu-ppc"
 CONFIG_LINUX_USER=y
-TARGET_XML_FILES= /home/yangye/secure-vhost2/qemu-2.10.0-rc3/gdb-xml/power-core.xml /home/yangye/secure-vhost2/qemu-2.10.0-rc3/gdb-xml/power-fpu.xml /home/yangye/secure-vhost2/qemu-2.10.0-rc3/gdb-xml/power-altivec.xml /home/yangye/secure-vhost2/qemu-2.10.0-rc3/gdb-xml/power-spe.xml
+TARGET_XML_FILES= /home/yangye/secure-vhost/qemu-2.10.0-rc3/gdb-xml/power-core.xml /home/yangye/secure-vhost/qemu-2.10.0-rc3/gdb-xml/power-fpu.xml /home/yangye/secure-vhost/qemu-2.10.0-rc3/gdb-xml/power-altivec.xml /home/yangye/secure-vhost/qemu-2.10.0-rc3/gdb-xml/power-spe.xml
 CONFIG_I386_DIS=y
 CONFIG_PPC_DIS=y
 LDFLAGS+= -Wl,-Ttext-segment=0x60000000

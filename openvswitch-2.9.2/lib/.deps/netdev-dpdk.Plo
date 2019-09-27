@@ -65,10 +65,9 @@ lib/netdev-dpdk.lo: lib/netdev-dpdk.c /usr/include/stdc-predef.h config.h \
  /usr/include/x86_64-linux-gnu/bits/socket2.h /usr/include/linux/if.h \
  /usr/include/linux/libc-compat.h /usr/include/linux/socket.h \
  /usr/include/linux/hdlc/ioctl.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus_pci.h \
- lib/stdio.h /usr/include/stdio.h /usr/include/libio.h \
- /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h \
+ ../dpdk-eal-master/build/include/rte_bus_pci.h lib/stdio.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
@@ -83,50 +82,48 @@ lib/netdev-dpdk.lo: lib/netdev-dpdk.c /usr/include/stdc-predef.h config.h \
  /usr/include/x86_64-linux-gnu/sys/queue.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h /usr/include/inttypes.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_debug.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h \
- /usr/include/ctype.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_interrupts.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal_interrupts.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cycles.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cycles.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic.h \
+ ../dpdk-eal-master/build/include/rte_debug.h \
+ ../dpdk-eal-master/build/include/rte_log.h \
+ ../dpdk-eal-master/build/include/rte_common.h /usr/include/ctype.h \
+ ../dpdk-eal-master/build/include/rte_config.h \
+ ../dpdk-eal-master/build/include/rte_branch_prediction.h \
+ ../dpdk-eal-master/build/include/rte_interrupts.h \
+ ../dpdk-eal-master/build/include/rte_eal_interrupts.h \
+ ../dpdk-eal-master/build/include/rte_dev.h \
+ ../dpdk-eal-master/build/include/rte_log.h \
+ ../dpdk-eal-master/build/include/rte_bus.h \
+ ../dpdk-eal-master/build/include/rte_pci.h \
+ ../dpdk-eal-master/build/include/rte_cycles.h \
+ ../dpdk-eal-master/build/include/generic/rte_cycles.h \
+ ../dpdk-eal-master/build/include/rte_atomic.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/emmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/mmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/mm_malloc.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_atomic.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic_64.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_errno.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h \
- /usr/include/pthread.h /usr/include/sched.h \
- /usr/include/x86_64-linux-gnu/bits/sched.h \
+ ../dpdk-eal-master/build/include/generic/rte_atomic.h \
+ ../dpdk-eal-master/build/include/rte_atomic_64.h \
+ ../dpdk-eal-master/build/include/rte_branch_prediction.h \
+ ../dpdk-eal-master/build/include/rte_errno.h \
+ ../dpdk-eal-master/build/include/rte_per_lcore.h /usr/include/pthread.h \
+ /usr/include/sched.h /usr/include/x86_64-linux-gnu/bits/sched.h \
  /usr/include/x86_64-linux-gnu/bits/timex.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eth_ring.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ring.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memory.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_lcore.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci_dev_feature_defs.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_launch.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memzone.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_pause.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ethdev.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_devargs.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ether.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memcpy.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_vect.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_vect.h \
+ ../dpdk-eal-master/build/include/rte_eth_ring.h \
+ ../dpdk-eal-master/build/include/rte_ring.h \
+ ../dpdk-eal-master/build/include/rte_memory.h \
+ ../dpdk-eal-master/build/include/rte_lcore.h \
+ ../dpdk-eal-master/build/include/rte_eal.h \
+ ../dpdk-eal-master/build/include/rte_pci_dev_feature_defs.h \
+ ../dpdk-eal-master/build/include/rte_launch.h \
+ ../dpdk-eal-master/build/include/rte_memzone.h \
+ ../dpdk-eal-master/build/include/rte_pause.h \
+ ../dpdk-eal-master/build/include/generic/rte_pause.h \
+ ../dpdk-eal-master/build/include/rte_ethdev.h \
+ ../dpdk-eal-master/build/include/rte_devargs.h \
+ ../dpdk-eal-master/build/include/rte_ether.h \
+ ../dpdk-eal-master/build/include/rte_memcpy.h \
+ ../dpdk-eal-master/build/include/rte_vect.h \
+ ../dpdk-eal-master/build/include/generic/rte_vect.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/x86intrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/ia32intrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/pmmintrin.h \
@@ -176,37 +173,37 @@ lib/netdev-dpdk.lo: lib/netdev-dpdk.c /usr/include/stdc-predef.h config.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/xsavesintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/xsavecintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/mwaitxintrin.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_random.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mempool.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_spinlock.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_spinlock.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_rtm.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cpuflags.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cpuflags.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_prefetch.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_prefetch.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf_ptype.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_byteorder.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_byteorder.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_byteorder_64.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eth_ctrl.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev_info.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_malloc.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_meter.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_vhost.h \
+ ../dpdk-eal-master/build/include/rte_random.h \
+ ../dpdk-eal-master/build/include/rte_mbuf.h \
+ ../dpdk-eal-master/build/include/rte_mempool.h \
+ ../dpdk-eal-master/build/include/rte_spinlock.h \
+ ../dpdk-eal-master/build/include/generic/rte_spinlock.h \
+ ../dpdk-eal-master/build/include/rte_rtm.h \
+ ../dpdk-eal-master/build/include/rte_cpuflags.h \
+ ../dpdk-eal-master/build/include/generic/rte_cpuflags.h \
+ ../dpdk-eal-master/build/include/rte_common.h \
+ ../dpdk-eal-master/build/include/rte_pause.h \
+ ../dpdk-eal-master/build/include/rte_prefetch.h \
+ ../dpdk-eal-master/build/include/generic/rte_prefetch.h \
+ ../dpdk-eal-master/build/include/rte_mbuf_ptype.h \
+ ../dpdk-eal-master/build/include/rte_byteorder.h \
+ ../dpdk-eal-master/build/include/generic/rte_byteorder.h \
+ ../dpdk-eal-master/build/include/rte_byteorder_64.h \
+ ../dpdk-eal-master/build/include/rte_eth_ctrl.h \
+ ../dpdk-eal-master/build/include/rte_dev_info.h \
+ ../dpdk-eal-master/build/include/rte_malloc.h \
+ ../dpdk-eal-master/build/include/rte_meter.h \
+ ../dpdk-eal-master/build/include/rte_vhost.h \
  /usr/include/x86_64-linux-gnu/sys/eventfd.h \
  /usr/include/x86_64-linux-gnu/bits/eventfd.h /usr/include/linux/vhost.h \
  /usr/include/linux/ioctl.h /usr/include/x86_64-linux-gnu/asm/ioctl.h \
  /usr/include/asm-generic/ioctl.h /usr/include/linux/virtio_ring.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_version.h \
- lib/dirs.h lib/dp-packet.h include/openvswitch/list.h \
- include/openvswitch/types.h include/openvswitch/util.h \
- include/openvswitch/version.h lib/packets.h lib/compiler.h \
- include/openvswitch/geneve.h include/openvswitch/packets.h \
- /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/bits/in.h \
+ ../dpdk-eal-master/build/include/rte_version.h lib/dirs.h \
+ lib/dp-packet.h include/openvswitch/list.h include/openvswitch/types.h \
+ include/openvswitch/util.h include/openvswitch/version.h lib/packets.h \
+ lib/compiler.h include/openvswitch/geneve.h \
+ include/openvswitch/packets.h /usr/include/netinet/in.h \
+ /usr/include/x86_64-linux-gnu/bits/in.h \
  include/openvswitch/tun-metadata.h include/openvswitch/nsh.h \
  include/odp-netlink.h include/openvswitch/types.h lib/random.h \
  lib/hash.h lib/util.h /usr/include/arpa/inet.h lib/tun-metadata.h \
@@ -416,7 +413,7 @@ lib/string.h:
 
 /usr/include/linux/hdlc/ioctl.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus_pci.h:
+../dpdk-eal-master/build/include/rte_bus_pci.h:
 
 lib/stdio.h:
 
@@ -464,35 +461,35 @@ lib/stdio.h:
 
 /usr/include/inttypes.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_debug.h:
+../dpdk-eal-master/build/include/rte_debug.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h:
+../dpdk-eal-master/build/include/rte_log.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h:
+../dpdk-eal-master/build/include/rte_common.h:
 
 /usr/include/ctype.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h:
+../dpdk-eal-master/build/include/rte_config.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h:
+../dpdk-eal-master/build/include/rte_branch_prediction.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_interrupts.h:
+../dpdk-eal-master/build/include/rte_interrupts.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal_interrupts.h:
+../dpdk-eal-master/build/include/rte_eal_interrupts.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev.h:
+../dpdk-eal-master/build/include/rte_dev.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h:
+../dpdk-eal-master/build/include/rte_log.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus.h:
+../dpdk-eal-master/build/include/rte_bus.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci.h:
+../dpdk-eal-master/build/include/rte_pci.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cycles.h:
+../dpdk-eal-master/build/include/rte_cycles.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cycles.h:
+../dpdk-eal-master/build/include/generic/rte_cycles.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic.h:
+../dpdk-eal-master/build/include/rte_atomic.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/emmintrin.h:
 
@@ -502,15 +499,15 @@ lib/stdio.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/mm_malloc.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_atomic.h:
+../dpdk-eal-master/build/include/generic/rte_atomic.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic_64.h:
+../dpdk-eal-master/build/include/rte_atomic_64.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h:
+../dpdk-eal-master/build/include/rte_branch_prediction.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_errno.h:
+../dpdk-eal-master/build/include/rte_errno.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h:
+../dpdk-eal-master/build/include/rte_per_lcore.h:
 
 /usr/include/pthread.h:
 
@@ -522,37 +519,37 @@ lib/stdio.h:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eth_ring.h:
+../dpdk-eal-master/build/include/rte_eth_ring.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ring.h:
+../dpdk-eal-master/build/include/rte_ring.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memory.h:
+../dpdk-eal-master/build/include/rte_memory.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_lcore.h:
+../dpdk-eal-master/build/include/rte_lcore.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal.h:
+../dpdk-eal-master/build/include/rte_eal.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci_dev_feature_defs.h:
+../dpdk-eal-master/build/include/rte_pci_dev_feature_defs.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_launch.h:
+../dpdk-eal-master/build/include/rte_launch.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memzone.h:
+../dpdk-eal-master/build/include/rte_memzone.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h:
+../dpdk-eal-master/build/include/rte_pause.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_pause.h:
+../dpdk-eal-master/build/include/generic/rte_pause.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ethdev.h:
+../dpdk-eal-master/build/include/rte_ethdev.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_devargs.h:
+../dpdk-eal-master/build/include/rte_devargs.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_ether.h:
+../dpdk-eal-master/build/include/rte_ether.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memcpy.h:
+../dpdk-eal-master/build/include/rte_memcpy.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_vect.h:
+../dpdk-eal-master/build/include/rte_vect.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_vect.h:
+../dpdk-eal-master/build/include/generic/rte_vect.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/x86intrin.h:
 
@@ -652,47 +649,47 @@ lib/stdio.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/mwaitxintrin.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_random.h:
+../dpdk-eal-master/build/include/rte_random.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf.h:
+../dpdk-eal-master/build/include/rte_mbuf.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mempool.h:
+../dpdk-eal-master/build/include/rte_mempool.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_spinlock.h:
+../dpdk-eal-master/build/include/rte_spinlock.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_spinlock.h:
+../dpdk-eal-master/build/include/generic/rte_spinlock.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_rtm.h:
+../dpdk-eal-master/build/include/rte_rtm.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cpuflags.h:
+../dpdk-eal-master/build/include/rte_cpuflags.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cpuflags.h:
+../dpdk-eal-master/build/include/generic/rte_cpuflags.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h:
+../dpdk-eal-master/build/include/rte_common.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pause.h:
+../dpdk-eal-master/build/include/rte_pause.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_prefetch.h:
+../dpdk-eal-master/build/include/rte_prefetch.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_prefetch.h:
+../dpdk-eal-master/build/include/generic/rte_prefetch.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_mbuf_ptype.h:
+../dpdk-eal-master/build/include/rte_mbuf_ptype.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_byteorder.h:
+../dpdk-eal-master/build/include/rte_byteorder.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_byteorder.h:
+../dpdk-eal-master/build/include/generic/rte_byteorder.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_byteorder_64.h:
+../dpdk-eal-master/build/include/rte_byteorder_64.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eth_ctrl.h:
+../dpdk-eal-master/build/include/rte_eth_ctrl.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev_info.h:
+../dpdk-eal-master/build/include/rte_dev_info.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_malloc.h:
+../dpdk-eal-master/build/include/rte_malloc.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_meter.h:
+../dpdk-eal-master/build/include/rte_meter.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_vhost.h:
+../dpdk-eal-master/build/include/rte_vhost.h:
 
 /usr/include/x86_64-linux-gnu/sys/eventfd.h:
 
@@ -708,7 +705,7 @@ lib/stdio.h:
 
 /usr/include/linux/virtio_ring.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_version.h:
+../dpdk-eal-master/build/include/rte_version.h:
 
 lib/dirs.h:
 

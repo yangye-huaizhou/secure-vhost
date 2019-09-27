@@ -105,6 +105,7 @@ typedef struct VhostUserMsg {
         struct vhost_vring_addr addr;
         VhostUserMemory memory;
         VhostUserLog log;
+	int ppid;
     } payload;
 
     int fds[VHOST_MEMORY_MAX_NREGIONS];

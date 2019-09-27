@@ -6,7 +6,7 @@ TARGET_ABI_DIR=x86_64
 CONFIG_USER_ONLY=y
 CONFIG_QEMU_INTERP_PREFIX="/usr/gnemul/qemu-x86_64"
 CONFIG_LINUX_USER=y
-TARGET_XML_FILES= /home/yangye/secure-vhost2/qemu-2.10.0-rc3/gdb-xml/i386-64bit.xml /home/yangye/secure-vhost2/qemu-2.10.0-rc3/gdb-xml/i386-64bit-core.xml /home/yangye/secure-vhost2/qemu-2.10.0-rc3/gdb-xml/i386-64bit-sse.xml
+TARGET_XML_FILES= /home/yangye/secure-vhost/qemu-2.10.0-rc3/gdb-xml/i386-64bit.xml /home/yangye/secure-vhost/qemu-2.10.0-rc3/gdb-xml/i386-64bit-core.xml /home/yangye/secure-vhost/qemu-2.10.0-rc3/gdb-xml/i386-64bit-sse.xml
 CONFIG_I386_DIS=y
 CONFIG_I386_DIS=y
 LDFLAGS+= -Wl,-Ttext-segment=0x60000000

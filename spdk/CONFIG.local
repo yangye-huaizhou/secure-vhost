@@ -1,1 +1,1 @@
-CONFIG_DPDK_DIR?=/home/yangye/secure-vhost/dpdk-eal-master/x86_64-native-linuxapp-gcc
+CONFIG_DPDK_DIR?=/home/yangye/secure-vhost/dpdk-eal-master/build

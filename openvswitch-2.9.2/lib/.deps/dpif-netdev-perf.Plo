@@ -55,12 +55,12 @@ lib/dpif-netdev-perf.lo: lib/dpif-netdev-perf.c \
  /usr/include/x86_64-linux-gnu/bits/mathdef.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathinline.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cycles.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cycles.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_debug.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h \
+ ../dpdk-eal-master/build/include/rte_config.h \
+ ../dpdk-eal-master/build/include/rte_cycles.h \
+ ../dpdk-eal-master/build/include/generic/rte_cycles.h \
+ ../dpdk-eal-master/build/include/rte_debug.h \
+ ../dpdk-eal-master/build/include/rte_log.h \
+ ../dpdk-eal-master/build/include/rte_common.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
@@ -69,15 +69,15 @@ lib/dpif-netdev-perf.lo: lib/dpif-netdev-perf.c \
  /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic.h \
+ ../dpdk-eal-master/build/include/rte_branch_prediction.h \
+ ../dpdk-eal-master/build/include/rte_atomic.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/emmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/mmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/mm_malloc.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_atomic.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic_64.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h \
+ ../dpdk-eal-master/build/include/generic/rte_atomic.h \
+ ../dpdk-eal-master/build/include/rte_atomic_64.h \
+ ../dpdk-eal-master/build/include/rte_branch_prediction.h \
  lib/ovs-atomic.h lib/compiler.h lib/util.h /usr/include/netinet/in.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/sys/uio.h \
@@ -251,17 +251,17 @@ lib/string.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathinline.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h:
+../dpdk-eal-master/build/include/rte_config.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_cycles.h:
+../dpdk-eal-master/build/include/rte_cycles.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_cycles.h:
+../dpdk-eal-master/build/include/generic/rte_cycles.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_debug.h:
+../dpdk-eal-master/build/include/rte_debug.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h:
+../dpdk-eal-master/build/include/rte_log.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h:
+../dpdk-eal-master/build/include/rte_common.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
@@ -289,9 +289,9 @@ lib/string.h:
 
 /usr/include/asm-generic/errno-base.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h:
+../dpdk-eal-master/build/include/rte_branch_prediction.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic.h:
+../dpdk-eal-master/build/include/rte_atomic.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/emmintrin.h:
 
@@ -301,11 +301,11 @@ lib/string.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/mm_malloc.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/generic/rte_atomic.h:
+../dpdk-eal-master/build/include/generic/rte_atomic.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_atomic_64.h:
+../dpdk-eal-master/build/include/rte_atomic_64.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_branch_prediction.h:
+../dpdk-eal-master/build/include/rte_branch_prediction.h:
 
 lib/ovs-atomic.h:
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEVICE="0000:01:00.0 0000:01:00.1"
+DEVICE="0000:05:00.0 0000:05:00.1"
 DRIVER="vfio-pci"
 
 while getopts ":hd:r:" optname
@@ -24,6 +24,7 @@ do
   esac
 done
 echo "mounting hugepages..."
+mkdir -p /dev/hugepages
 mount -t hugetlbfs -o pagesize=1G none /dev/hugepages
 mount -t hugetlbfs nodev /mnt/huge
 #mount -t hugetlbfs -o pagesize=2M none /dev/hugepages

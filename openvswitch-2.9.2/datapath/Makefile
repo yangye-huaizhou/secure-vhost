@@ -198,7 +198,7 @@ AUTOCONF = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missin
 AUTOHEADER = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing autoheader
 AUTOM4TE = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing autom4te
 AUTOMAKE = ${SHELL} /home/yangye/secure-vhost/openvswitch-2.9.2/build-aux/missing automake-1.15
-AWK = gawk
+AWK = mawk
 CAPNG_LDADD = 
 CC = $(if $(C:0=),env REAL_CC="gcc" CHECK="$(SPARSE) $(SPARSE_WERROR) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc)
 CCDEPMODE = depmode=gcc3
@@ -271,9 +271,9 @@ OBJDUMP = objdump
 OBJEXT = o
 OTOOL = 
 OTOOL64 = 
-OVS_CFLAGS =  -I../dpdk-eal-master/x86_64-native-linuxapp-gcc/include
+OVS_CFLAGS =  -I../dpdk-eal-master/build/include
 OVS_CTAGS_IDENTIFIERS_LIST = -I "OVS_REQ_RDLOCK+ OVS_ACQ_RDLOCK+ OVS_REQ_WRLOCK+ OVS_ACQ_WRLOCK+ OVS_REQUIRES+ OVS_ACQUIRES+ OVS_TRY_WRLOCK+ OVS_TRY_RDLOCK+ OVS_TRY_LOCK+ OVS_GUARDED_BY+ OVS_EXCLUDED+ OVS_RELEASES+ OVS_ACQ_BEFORE+ OVS_ACQ_AFTER+ "
-OVS_LDFLAGS =  -L../dpdk-eal-master/x86_64-native-linuxapp-gcc/lib
+OVS_LDFLAGS =  -L../dpdk-eal-master/build/lib
 OVS_LTINFO = -release 2.9 -version-info 0:2
 PACKAGE = openvswitch
 PACKAGE_BUGREPORT = bugs@openvswitch.org

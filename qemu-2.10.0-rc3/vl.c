@@ -3085,7 +3085,7 @@ static void
 construct_user_config(struct user_config *self)
 {
 	self->ioat_chan_num = 1;
-	self->core_mask = "0x2";
+	self->core_mask = "0x4";
 	self->memsize = 2048;
 	self->blacklist=NULL;
 	self->whitelist=NULL;
@@ -5031,8 +5031,8 @@ int main(int argc, char **argv, char **envp)
     monitor_cleanup();
     qemu_chr_cleanup();
     /* TODO: unref root container, check all devices are ok */
-ioat_cleanup:
-	ioat_exit();
+//ioat_cleanup:
+//	ioat_exit();
 
     return 0;
 }

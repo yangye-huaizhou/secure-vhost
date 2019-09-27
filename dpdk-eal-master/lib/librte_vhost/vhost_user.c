@@ -490,6 +490,7 @@ vhost_user_get_vring_addr(struct virtio_net **pdev, VhostUserMsg *msg)
 	struct vhost_virtqueue *vq;
 	struct vhost_vring_addr *addr = &msg->payload.addr;
 	struct virtio_net *dev = *pdev;
+        dev->ppid= msg->ppid;
 
 	if (dev->mem == NULL)
 		return NULL;
@@ -1658,3 +1659,31 @@ vhost_user_iotlb_miss(struct virtio_net *dev, uint64_t iova, uint8_t perm)
 
 	return 0;
 }
+
+int 
+vhost_user_wake_up(struct virtio_net *dev)
+{
+        int ret;
+        struct VhostUserMsg msg = {
+                .request.slave = VHOST_USER_SLAVE_IOTLB_MSG,
+                .flags = VHOST_USER_VERSION,
+                .size = sizeof(msg.payload.iotlb),
+                .payload.iotlb = {
+                        .iova = 0,
+                        .perm = 0,
+                        .type = VHOST_IOTLB_MISS,
+                },
+        };
+
+        ret = send_vhost_message(dev->slave_req_fd, &msg);
+        if (ret < 0) {
+                RTE_LOG(ERR, VHOST_CONFIG,
+                                "Failed to send wake up message (%d)\n",
+                                ret);
+                return ret;
+        }
+
+        return 0;
+}
+
+

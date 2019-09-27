@@ -1,10 +1,9 @@
 lib/dpdk.lo: lib/dpdk.c /usr/include/stdc-predef.h config.h lib/dpdk.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_lcore.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h \
- /usr/include/pthread.h /usr/include/features.h \
- /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+ ../dpdk-eal-master/build/include/rte_config.h \
+ ../dpdk-eal-master/build/include/rte_lcore.h \
+ ../dpdk-eal-master/build/include/rte_per_lcore.h /usr/include/pthread.h \
+ /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h /usr/include/endian.h \
@@ -19,21 +18,20 @@ lib/dpdk.lo: lib/dpdk.c /usr/include/stdc-predef.h config.h lib/dpdk.h \
  /usr/include/x86_64-linux-gnu/bits/timex.h /usr/include/xlocale.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal.h \
+ ../dpdk-eal-master/build/include/rte_eal.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus.h \
- lib/stdio.h /usr/include/stdio.h /usr/include/libio.h \
- /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h \
+ ../dpdk-eal-master/build/include/rte_bus.h lib/stdio.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2.h \
  /usr/include/x86_64-linux-gnu/sys/queue.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h \
- /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+ ../dpdk-eal-master/build/include/rte_log.h \
+ ../dpdk-eal-master/build/include/rte_common.h /usr/include/stdlib.h \
+ /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
  /usr/include/x86_64-linux-gnu/sys/types.h \
  /usr/include/x86_64-linux-gnu/sys/select.h \
@@ -54,16 +52,15 @@ lib/dpdk.lo: lib/dpdk.c /usr/include/stdc-predef.h config.h lib/dpdk.h \
  /usr/include/linux/limits.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci_dev_feature_defs.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_launch.h \
+ ../dpdk-eal-master/build/include/rte_dev.h \
+ ../dpdk-eal-master/build/include/rte_pci_dev_feature_defs.h \
+ ../dpdk-eal-master/build/include/rte_launch.h \
  /usr/include/x86_64-linux-gnu/sys/stat.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h /usr/include/getopt.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memzone.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memory.h \
- ../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_version.h \
- lib/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/string.h \
+ ../dpdk-eal-master/build/include/rte_memzone.h \
+ ../dpdk-eal-master/build/include/rte_memory.h \
+ ../dpdk-eal-master/build/include/rte_version.h lib/string.h \
+ /usr/include/string.h /usr/include/x86_64-linux-gnu/bits/string.h \
  /usr/include/x86_64-linux-gnu/bits/string2.h \
  /usr/include/x86_64-linux-gnu/bits/string3.h lib/dirs.h \
  lib/fatal-signal.h /usr/include/signal.h \
@@ -102,11 +99,11 @@ lib/dpdk.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_config.h:
+../dpdk-eal-master/build/include/rte_config.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_lcore.h:
+../dpdk-eal-master/build/include/rte_lcore.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h:
+../dpdk-eal-master/build/include/rte_per_lcore.h:
 
 /usr/include/pthread.h:
 
@@ -150,7 +147,7 @@ lib/dpdk.h:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_eal.h:
+../dpdk-eal-master/build/include/rte_eal.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
 
@@ -158,7 +155,7 @@ lib/dpdk.h:
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_bus.h:
+../dpdk-eal-master/build/include/rte_bus.h:
 
 lib/stdio.h:
 
@@ -182,9 +179,9 @@ lib/stdio.h:
 
 /usr/include/x86_64-linux-gnu/sys/queue.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_log.h:
+../dpdk-eal-master/build/include/rte_log.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_common.h:
+../dpdk-eal-master/build/include/rte_common.h:
 
 /usr/include/stdlib.h:
 
@@ -242,11 +239,11 @@ lib/stdio.h:
 
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_dev.h:
+../dpdk-eal-master/build/include/rte_dev.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_pci_dev_feature_defs.h:
+../dpdk-eal-master/build/include/rte_pci_dev_feature_defs.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_launch.h:
+../dpdk-eal-master/build/include/rte_launch.h:
 
 /usr/include/x86_64-linux-gnu/sys/stat.h:
 
@@ -254,11 +251,11 @@ lib/stdio.h:
 
 /usr/include/getopt.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memzone.h:
+../dpdk-eal-master/build/include/rte_memzone.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_memory.h:
+../dpdk-eal-master/build/include/rte_memory.h:
 
-../dpdk-eal-master/x86_64-native-linuxapp-gcc/include/rte_version.h:
+../dpdk-eal-master/build/include/rte_version.h:
 
 lib/string.h:
 

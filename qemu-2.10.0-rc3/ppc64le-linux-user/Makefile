@@ -1,1 +1,1 @@
-/home/yangye/secure-vhost2/qemu-2.10.0-rc3/Makefile.target
+/home/yangye/secure-vhost/qemu-2.10.0-rc3/Makefile.target

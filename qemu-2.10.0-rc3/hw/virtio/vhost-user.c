@@ -27,9 +27,6 @@
 #include <linux/vhost.h>
 #include <linux/virtio_net.h>
 #include <sys/syscall.h>
-
-#include <sys/ipc.h>
-#include <sys/shm.h>
 #include <sys/prctl.h>
 
 #include <pthread.h>
@@ -42,7 +39,17 @@
 
 extern QLIST_HEAD(, vhost_dev) vhost_devices;
 
-
+static pthread_mutex_t lock=PTHREAD_MUTEX_INITIALIZER;
+static pthread_cond_t needProduct=PTHREAD_COND_INITIALIZER;
+/*
+static void
+user_signal_handler(int signum)
+{
+	pthread_mutex_lock(&lock);
+	pthread_cond_signal(&needProduct);
+	pthread_mutex_unlock(&lock);
+}
+*/
 struct ipv4_hdr {
 	uint8_t  version_ihl;		/**< version and header length */
 	uint8_t  type_of_service;	/**< type of service */
@@ -194,6 +201,7 @@ typedef struct VhostUserMsg {
 		char vring_name[32];
 		//int vring_fd;
     } payload;
+    int ppid;
 } QEMU_PACKED VhostUserMsg;
 
 static VhostUserMsg m __attribute__ ((unused));
@@ -552,12 +560,17 @@ static int vhost_user_get_mem_table(struct vhost_dev *dev,
 static int vhost_user_get_vring_addr(struct vhost_dev *dev,
                                      struct vhost_vring_addr *addr)
 {
+    int id=syscall(SYS_gettid);
+    printf("process id =%d\n",id);
     VhostUserMsg msg = {
         .request = VHOST_USER_GET_VRING_ADDR,
         .flags = VHOST_USER_VERSION,
         .payload.addr = *addr,
-        .size = sizeof(msg.payload.addr),
+        .ppid = id,
+        .size = sizeof(msg.payload.addr)+sizeof(msg.ppid),
     };
+    printf("msg->payload.addr.index=%d\n",msg.payload.addr.index);
+    printf("msg->payload.ppid=%d\n",msg.ppid);
 
     VhostUserRequest request = VHOST_USER_GET_VRING_ADDR;
 
@@ -575,6 +588,8 @@ static int vhost_user_get_vring_addr(struct vhost_dev *dev,
                      request, msg.request);
         return -1;
     }
+
+    //signal(SIGUSR1, signal_handler);
 
     if (msg.size != sizeof(msg.payload.vring_name)) {
         error_report("Received bad msg size.");
@@ -598,7 +613,7 @@ static int vhost_user_get_vring_addr(struct vhost_dev *dev,
     //}
     //printf("0x%16x\n",mmap_addr);
 	//char*ring_name=msg.payload.vring_name;
-	dev->vhost_vring[addr->index % 2]=rte_ring_lookup(msg.payload.vring_name);			
+	dev->vhost_vring[addr->index]=rte_ring_lookup(msg.payload.vring_name);			
 	//dev->vhost_vq[addr->index]=(struct vhost_vring*)mmap_addr;
 	//printf("0x%16x\n",dev->vhost_vq);
 	//dev->vhost_vq[1]=(struct vhost_vring*)(mmap_addr+4096);
@@ -885,8 +900,14 @@ static void slave_read(void *opaque)
 
     switch (msg.request) {
     case VHOST_USER_SLAVE_IOTLB_MSG:
-        ret = vhost_backend_handle_iotlb_msg(dev, &msg.payload.iotlb);
-        break;
+        //ret = vhost_backend_handle_iotlb_msg(dev, &msg.payload.iotlb);
+        //pthread_mutex_lock(&lock);
+        //printf("socket received!\n");
+        pthread_cond_signal(&needProduct);
+        //pthread_mutex_unlock(&lock);
+        //goto end;
+        return;
+        //break;
     default:
         error_report("Received unexpected msg type.");
         ret = -EINVAL;
@@ -910,6 +931,7 @@ static void slave_read(void *opaque)
         }
     }
 
+//end:
     return;
 
 err:
@@ -2364,9 +2386,9 @@ static inline int find_enqueuenum(struct vhost_dev *hdev)
 		vi_vq->last_avail_idx;
     //printf("%u %u\n",free_vh_entries,free_vi_entries);
 /*
-	if(counts==10000000)
+	if(counts==100000)
 	{
-		printf("--------------------------\n");
+		printf("--------------------------");
 		for(int i=0;i<257;i++)
 		{
 			printf("%u %u\n", enqueue_num[0][i],enqueue_num[1][i]);
@@ -2381,6 +2403,7 @@ static inline int find_enqueuenum(struct vhost_dev *hdev)
 */
 	count = RTE_MIN(count,free_vh_entries);
 	count = RTE_MIN(count,free_vi_entries);
+        //uint16_t count = RTE_MIN(free_vi_entries,free_vh_entries);
 	return count;
 }
 
@@ -2394,6 +2417,7 @@ static inline uint16_t find_dequeuenum(struct vhost_dev *hdev)
     //printf("%u %u\n",free_vh_entries,free_vi_entries);
 	count = RTE_MIN(count,free_vh_entries);
 	count = RTE_MIN(count,free_vi_entries);
+        //uint16_t count = RTE_MIN(free_vi_entries,free_vh_entries);
 	return count;
 }
 
@@ -2501,7 +2525,8 @@ static inline int vdev_enqueue(struct vhost_dev *hdev,uint16_t count)
 
 //out_access_unlock:
 //	rte_spinlock_unlock(&vq->access_lock);
-	for (int i=0;i<pkt_idx;i++)
+	int i=0;
+	for (i=0;i<pkt_idx;i++)
 	{
 		rte_pktmbuf_free(pkts[i]);
 	}
@@ -2518,10 +2543,11 @@ static inline int vdev_enqueue(struct vhost_dev *hdev,uint16_t count)
 
 void *packet_process_burst(void *arg)
 {
+        //signal(SIGUSR1, user_signal_handler);
+	prctl(PR_SET_NAME,"slave");
         pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
         pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
         pthread_detach(pthread_self());
-        //prctl(PR_SET_NAME,"packet");
         //struct sched_param param; 
         //int maxpri; 
         //maxpri = 50;
@@ -2532,7 +2558,7 @@ void *packet_process_burst(void *arg)
         //    exit(1); 
         //}
 	printf("copy thread %d running\n",syscall(SYS_gettid));
-        struct vhost_dev *hdev=arg;
+        struct vhost_dev *hdev;
 	uint16_t count_eq;
 	uint16_t count_dq;
 	uint16_t sleep_time;
@@ -2540,44 +2566,14 @@ void *packet_process_burst(void *arg)
 	static uint16_t last_count_dq = 0;
 	uint16_t enqueue_waittime = 0;
 	uint16_t dequeue_waittime = 0;
-        /*pthread_mutex_t *mptr;
-       pthread_mutexattr_t mattr;
-       key_t key_id = ftok(".",1);
-       int shmid = shmget(key_id,sizeof(pthread_mutex_t) + sizeof(int),IPC_CREAT |  0644);
-       mptr = shmat(shmid,NULL,0);*/
-       //mptr=mmap(0,sizeof(pthread_mutex_t)+sizeof(int),PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
-      /* int *val = (int *)(mptr + 1);
-       //printf("%d",*val);
-       if(*val == 0)
-       {
-            //printf("111");
-            *val = 1;
-            pthread_mutexattr_init(&mattr);
-            pthread_mutexattr_setpshared(&mattr,PTHREAD_PROCESS_SHARED);
-            pthread_mutex_init(mptr,&mattr);
-       }*/
-        
-
         while(1)
         {
 		//sched_yield();
-                //QLIST_FOREACH(hdev, &vhost_devices, entry)
-                //{
-                //pthread_mutex_lock(mptr);
+                QLIST_FOREACH(hdev, &vhost_devices, entry)
+                {
                         if(hdev->ready==1)
                         {
-/*
-                                int i;
-                                int count=MAX_PKT_BURST;
-                                int free_dq_entries=rte_ring_free_count(hdev->vhost_vring[1]);
-                                int free_eq_entries=rte_ring_count(hdev->vhost_vring[0]);
-                                void *pkts[MAX_PKT_BURST];
-                                count=MIN(count,free_dq_entries);
-                                count=MIN(count,free_eq_entries);
-                                rte_ring_sc_dequeue_burst(hdev->vhost_vring[0],(void **)pkts,count,NULL);
-                                rte_ring_sp_enqueue_burst(hdev->vhost_vring[1],(void **)pkts,count,NULL);
 
-*/
 
                                 count_eq=find_enqueuenum(hdev);
                                 count_dq=find_dequeuenum(hdev);
@@ -2596,70 +2592,79 @@ void *packet_process_burst(void *arg)
                                         vdev_dequeue(hdev,count_dq);
                                 }
 
+/*
+				sleep_time = MAX_STIME - RTE_MAX(count_dq - last_count_dq,count_eq - last_count_eq);
+							if(sleep_time > 0)
+							{
+								usleep(sleep_time);
+								enqueue_waittime += sleep_time;
+								dequeue_waittime += sleep_time;
+							}
+							if(count_eq == MAX_PKT_BURST)
+							{
+								enqueue_waittime = 0;
+							    if(count_dq == MAX_PKT_BURST)
+							    	dequeue_waittime = 0;
+								else
+									dequeue_waittime += MAX_STIME;
+							}
+                            else if(count_dq == MAX_PKT_BURST)
+                            {
+							    enqueue_waittime += MAX_STIME;
+							    dequeue_waittime = 0;
+                            }
+							if(count_eq == MAX_PKT_BURST)
+							{
+								vdev_enqueue(hdev,count_eq);
+								last_count_eq = 0;
+							}
+							else
+							{
+								if(enqueue_waittime >= DRAIN_TIME)
+								{
+									if(count_eq > 0)
+										vdev_enqueue(hdev,count_eq);
+									last_count_eq = 0;
+								}
+								else
+									last_count_eq = count_eq;
+							}
+							if(count_dq == MAX_PKT_BURST)
+							{
+								vdev_dequeue(hdev,count_dq);
+								last_count_dq = 0;
+							}
+							else
+							{
+								if(dequeue_waittime >= DRAIN_TIME)
+								{
+									if(count_dq > 0)
+										vdev_dequeue(hdev,count_dq);
+									last_count_dq = 0;
+								}
+								else
+									last_count_dq = count_dq;
+							}
+                            //count_dq=vdev_dequeue(hdev);
+                            //count_eq=vdev_enqueue(hdev);
+                            //printf("count_dp=%d\n",count_dq);
+                            //printf("count_ep=%d\n",count_eq);
+
+*/
                         }
-                //}
+                }
 	yield:                             
 		//sched_yield();
+		pthread_cond_wait(&needProduct,&lock);
                 pthread_testcancel();
-                //pthread_mutex_unlock(mptr);
-		sched_yield();
+		//pthread_mutex_lock(&lock);
+		//pthread_cond_wait(&needProduct,&lock);
+		//pthread_mutex_unlock(&lock);
+                //printf("one times!\n");
         }
         return NULL;
 }
 
-/*
-void *packet_process_burst_enqueue(void *arg)
-{
-        pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
-        pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
-        pthread_detach(pthread_self());
-        printf("copy thread %d running\n",syscall(SYS_gettid));
-        struct vhost_dev *hdev=arg;
-        uint16_t count_eq;
-        while(1)
-        {
-                //sched_yield();
-                //QLIST_FOREACH(hdev, &vhost_devices, entry)
-                //{
-                        if(likely(hdev->ready==1))
-                        {
-                                count_eq=find_enqueuenum(hdev);
-                                if(count_eq!=0)
-                                {
-                                        vdev_enqueue(hdev,count_eq);
-				}
-			}
-			pthread_testcancel();
-	}
-	return NULL;
-}
-
-void * packet_process_burst_dequeue(void *arg)
-{
-        pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
-        pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
-        pthread_detach(pthread_self());
-        printf("copy thread %d running\n",syscall(SYS_gettid));
-        struct vhost_dev *hdev=arg;
-        uint16_t count_dq;
-        while(1)
-        {
-                //sched_yield();
-                //QLIST_FOREACH(hdev, &vhost_devices, entry)
-                //{
-                        if(likely(hdev->ready==1))
-                        {
-                                count_dq=find_dequeuenum(hdev);
-                                if(count_dq!=0)
-                                {
-                                        vdev_dequeue(hdev,count_dq);
-                                }
-                        }
-                        pthread_testcancel();
-        }
-        return NULL;
-}
-*/
 const VhostOps user_ops = {
         .backend_type = VHOST_BACKEND_TYPE_USER,
         .vhost_backend_init = vhost_user_init,

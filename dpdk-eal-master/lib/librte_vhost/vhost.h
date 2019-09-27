@@ -42,10 +42,12 @@
 #include <linux/virtio_net.h>
 #include <sys/socket.h>
 #include <linux/if.h>
+#include <signal.h>
 
 #include <rte_log.h>
 #include <rte_ether.h>
 #include <rte_rwlock.h>
+#include <rte_cycles.h>
 
 #include "rte_vhost.h"
 
@@ -61,7 +63,7 @@
 
 
 #define MAX_VRING_NAME 32
-#define MAX_VRING_SIZE 256
+#define MAX_VRING_SIZE 512
 
 /**
  * Structure contains buffer address, length and descriptor index
@@ -285,6 +287,8 @@ struct virtio_net {
 	struct guest_page       *guest_pages;
 
 	int			slave_req_fd;
+        int ppid;
+        uint64_t prev_tsc;
 } __rte_cache_aligned;
 
 
@@ -409,6 +413,8 @@ struct vhost_device_ops const *vhost_driver_callback_get(const char *path);
  * TODO: fix it; we have one backend now
  */
 void vhost_backend_cleanup(struct virtio_net *dev);
+
+int vhost_user_wake_up(struct virtio_net *dev);
 
 uint64_t __vhost_iova_to_vva(struct virtio_net *dev, struct vhost_virtqueue *vq,
 			uint64_t iova, uint64_t *len, uint8_t perm);

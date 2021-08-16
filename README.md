@@ -153,7 +153,7 @@ by tenants.
 
 In detail designs, there are three main points to illustrate:
 
-**The socket establishment**
+**1.The data path establishment**
 
 In vhost-user, before the data path established, there is an socket based 
 channel to negotiate some configurations. The procedures are shown as the 
@@ -172,7 +172,7 @@ fd to vSwitch for `mmap` VM memory. Instead, QEMU sends query message to vSwitch
 for the name of `mbuf_pool`. Then in QEMU, it can easily operate packets in this 
 `mbuf_pool` transparently. 
 
-**The memory sharing and data path**
+**2.The memory sharing and data path**
 
 To make it clear the data path difference between the two solutions, we show both 
 architectures in detail:
@@ -180,11 +180,11 @@ architectures in detail:
 <p align="left">
   <img src="./media/vhost-user.png"/>
 <p/>
-
+***vhost-user***
 <p align="left">
   <img src="./media/secure-vhost.png"/>
 <p/>
-
+***secure-vhost***
 Comparing these two figures, it is easy to find that each packet only needs one time 
 of memory copying from host buffer to VM memory. The only change exists in shared memory 
 and the packet copier.
@@ -192,7 +192,7 @@ and the packet copier.
 To allow QEMU access vSwitch's host buffer, we compile QEMU into DPDK EAL. So all QEMU 
 processes and vSwitch process can operate the packets in `mbuf_pool` concurrently.
 
-**The scheduling of PD threads**
+**3.The scheduling of PD threads**
 
 As each VM has a separaed PD thread for copying packets. The CPU consumption will increase. 
 To make it more CPU friendly, we schedule multiple PD threads on the same CPU core. 

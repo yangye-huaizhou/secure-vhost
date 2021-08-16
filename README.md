@@ -164,11 +164,11 @@ following figure:
 <p/>
 
 The most important step is to process signal `VHOST_USER_SET_MEM_TABLE`, which 
-is to call `mmap` function to map VM's whole memory into vSwitch's memory 
+is to call `"mmap()"` function to map VM's whole memory into vSwitch's memory 
 address. 
 
 In secure-vhost, we modified this message processing fuction. QEMU does not send 
-fd to vSwitch for `mmap` VM memory. Instead, QEMU sends query message to vSwitch 
+fd to vSwitch for `"mmap()"` VM memory. Instead, QEMU sends query message to vSwitch 
 for the name of `mbuf_pool`. Then in QEMU, it can easily operate packets in this 
 `mbuf_pool` transparently. 
 
@@ -205,7 +205,7 @@ To make it more CPU friendly, we schedule multiple PD threads on the same CPU co
 But under Linux default "SCHED_OTHER" scheduling, one PD thread may be preempted when it is 
 in the critical zone. And that will cause serious dead lock (see "Known Issues" in http://doc.dpdk.org/guides/prog_guide/env_abstraction_layer.html). 
 So we set all PD threads under "SCHED_FIFO" and let each PD thread copy one batch of packets 
-before it calls `sched_yield()` to yield CPU core for others.
+before it calls `"sched_yield()"` to yield CPU core for others.
 
 ## How to use secure-vhost in latest version of the open source software?
 
@@ -220,6 +220,7 @@ dpdk-eal-master/lib/librte_vhost/virtio_net.c
 ```
 
 In `vhost_user.c`, we modified the socket message processing functions.
+
 In `virtio_net.c`, we removed the memory copying and added notification.
 
 ```
@@ -230,7 +231,9 @@ qemu-2.10.0-rc3/hw/virtio/vhost.c
 ```
 
 In `vl.c`, we added DPDK init function and DPDK command parse funtion.
+
 In `vhost.c`, we added the PD thread creation and initialization.
+
 In `vhost-user.c`, we modified the socket message processing functions, and we added 
 the main loop of PD thread and the packet copying function.
 

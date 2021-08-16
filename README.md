@@ -42,20 +42,42 @@ is rarely used for practical environments.
 ## What is secure-vhost?
 
 To solve the security issue in vhost-user without dropping performance, we propose 
-secure-vhost. In secure-vhost, we removed the insecure memory sharing, so VM's memory 
-did not need to be shared to any other process. To implement packet copying, we 
-transfered packet copying task is from vSwitch to QEMU, so that vSwitch should 
-securely share its host packet buffer to QEMU. As VM's main process, each QEMU 
-process is responsible for the packet copying task of a particular VM. As part 
-of hypervisor, QEMU is more trusty than vSwitch and it can access the VM inside 
-it by default. So this kind of memory sharing and packet copying is more secure.
+secure-vhost. In secure-vhost, we removed the insecure memory sharing, so VM memory 
+do not need to be shared to any other processes. We transfered packet copying task 
+from vSwitch to QEMU, so that vSwitch should securely share its host packet buffer 
+to QEMU. As VM's main process, each QEMU process is responsible for the packet copying 
+task of a particular VM. In our theory, QEMU is more trusty than vSwitch and it can 
+access the VM memory inside it by default. So this kind of memory sharing and packet 
+copying is more secure.
 
 More security discussion can be seen in paper: 
 >Ye Yang, Haiyang Jiang, Yongzheng Liang, Yulei Wu, Yilong Lv, Xing Li and Gaogang 
 Xie, "Isolation Guarantee for Efficient Virtualized Network I/O on Cloud Platform" 
 (accepted by HPCC-2020).
 
-## How to compile?
+## What is the difference between IVSHMEM, NetVM and secure-vhost?
+
+About ten years ago, a noval virtualized network I/O solution was proposed. That is the 
+well-knowned IVSHMEM and NetVM. They all adopt the memory sharing mechanism that shares 
+vSwitch's host packet buffer among all VMs, so that the packet copying is eliminated. 
+All VMs can operate such a block of memory transparently. Once the packet is DMAed from 
+hardware NIC to the host buffer, the vSwitch can notify the corresponding VM to access 
+it (rather than copying it, just directly operating the memory in host buffer). 
+
+The weakness of NetVM and IVSHMEM is also obvious, VM can access the packets belonging to 
+other VMs. So that solution was abandoned by the community.
+
+For secure-vhost, we do not share host buffer directly to VM (that is insecure!). We share 
+host buffer from vSwitch to QEMU process (which is out of the access from tenants). QEMU is 
+part of the hypervisor, which is maintained by cloud service providers. It is trusty and with 
+higher privilege. At the same time, we can also use `Intel PKEY` and other means to allow 
+the shared memory can only be accessed by copy thread and it is invisible for other threads 
+(such as VCPU threads). This will further prevent some edge channel attacks.
+
+As the price, one time of memory copying is inevitable in secure-vhost (while IVSHMEM and 
+NetVM are zero-copy solutions).
+
+## How to compile secure-vhost?
 
 The prototype system was implmented based on `DPDK-17.11.2`, `OVS-2.9.2` and `qemu-2.10.0-rc3`.
 
@@ -122,3 +144,85 @@ We also write an script in `setup.sh`.
 
 
 ## What is the difference between vhost-user and secure-vhost?
+
+Secure-vhost is implemented based on vhost-user. The main difference between 
+vhost-user and secure-vhost is the memory sharing and packet copying. So that 
+means secure-vhost can achieve the same compatibility and scalability as 
+vhost-user. And the transport from vhost-user to secure-vhost is not perceived 
+by tenants.
+
+In detail designs, there are three main points to illustrate:
+
+**The socket establishment**
+
+In vhost-user, before the data path established, there is an socket based 
+channel to negotiate some configurations. The procedures are shown as the 
+following figure:
+
+<p align="left">
+  <img src="./media/socket_channel_vhostuser.png"/>
+<p/>
+
+The most important step is to process signal `VHOST_USER_SET_MEM_TABLE`, which 
+is to call `mmap` function to map VM's whole memory into vSwitch's memory 
+address. 
+
+In secure-vhost, we modified this message processing fuction. QEMU does not send 
+fd to vSwitch for `mmap` VM memory. Instead, QEMU sends query message to vSwitch 
+for the name of `mbuf_pool`. Then in QEMU, it can easily operate packets in this 
+`mbuf_pool` transparently. 
+
+**The memory sharing and data path**
+
+To make it clear the data path difference between the two solutions, we show both 
+architectures in detail:
+
+<p align="left">
+  <img src="./media/vhost-user.png"/>
+<p/>
+
+<p align="left">
+  <img src="./media/secure-vhost.png"/>
+<p/>
+
+Comparing these two figures, it is easy to find that each packet only needs one time 
+of memory copying from host buffer to VM memory. The only change exists in shared memory 
+and the packet copier.
+
+**The scheduling of PD threads**
+
+As each VM has a separaed PD thread for copying packets. The CPU consumption will increase. 
+To make it more CPU friendly, we schedule multiple PD threads on the same CPU core. 
+
+But under Linux default "SCHED_OTHER" scheduling, one PD thread may be preempted when it is 
+in the critical zone. And that will cause serious dead lock (see "Known Issues" in http://doc.dpdk.org/guides/prog_guide/env_abstraction_layer.html). 
+So we set all PD threads under "SCHED_FIFO" and let each PD thread copy one batch of packets 
+before it calls `sched_yield()` to yield CPU core for others.
+
+## How to use secure-vhost in latest version?
+
+As secure-vhost is implemented on the old version of the open source software. Someone may 
+want to use it in latest version. But unfortunately, this demo is deeply coupled in the 
+software code. We can only give a guide about how to modify the original files.
+
+```
+For DPDK:
+dpdk-eal-master/lib/librte_vhost/vhost_user.c
+dpdk-eal-master/lib/librte_vhost/virtio_net.c
+```
+
+In `vhost_user.c`, we modified the socket message processing functions.
+In `virtio_net.c`, we removed the memory copying and added notification.
+
+```
+For QEMU:
+vl.c
+qemu-2.10.0-rc3/hw/virtio/vhost-user.c
+qemu-2.10.0-rc3/hw/virtio/vhost.c
+```
+
+In `vl.c`, we added DPDK init function and DPDK command parse funtion.
+In `vhost.c`, we added the PD thread creation and initialization.
+In `vhost-user.c`, we modified the socket message processing functions, and we added 
+the main loop of PD thread and the packet copying function.
+

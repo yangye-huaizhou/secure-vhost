@@ -57,8 +57,8 @@ Xie, "Isolation Guarantee for Efficient Virtualized Network I/O on Cloud Platfor
 
 ## What is the difference between IVSHMEM, NetVM and secure-vhost?
 
-About ten years ago, a noval virtualized network I/O solution was proposed. That is the 
-well-knowned IVSHMEM and NetVM. They all adopt the memory sharing mechanism that shares 
+About ten years ago, a noval virtualized network I/O solution was proposed. That eventually develops the 
+well-known IVSHMEM and NetVM. They all adopt the memory sharing mechanism that shares 
 vSwitch's host packet buffer among all VMs, so that the packet copying is eliminated. 
 All VMs can operate such a block of memory transparently. Once the packet is DMAed from 
 hardware NIC to the host buffer, the vSwitch can notify the corresponding VM to access 

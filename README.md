@@ -207,7 +207,7 @@ in the critical zone. And that will cause serious dead lock (see "Known Issues" 
 So we set all PD threads under "SCHED_FIFO" and let each PD thread copy one batch of packets 
 before it calls `sched_yield()` to yield CPU core for others.
 
-## How to use secure-vhost in latest version?
+## How to use secure-vhost in latest version of the open source software?
 
 As secure-vhost is implemented on the old version of the open source software. Someone may 
 want to use it in latest version. But unfortunately, this demo is deeply coupled in the 

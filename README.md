@@ -180,11 +180,15 @@ architectures in detail:
 <p align="left">
   <img src="./media/vhost-user.png"/>
 <p/>
+
 ***vhost-user***
+
 <p align="left">
   <img src="./media/secure-vhost.png"/>
 <p/>
+
 ***secure-vhost***
+
 Comparing these two figures, it is easy to find that each packet only needs one time 
 of memory copying from host buffer to VM memory. The only change exists in shared memory 
 and the packet copier.

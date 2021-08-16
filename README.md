@@ -122,7 +122,7 @@ Compile and install QEMU:
 cd ../qemu-2.10.0-rc3/
 ./compile.sh
 ```
-**You need to change the path in compile.sh according to your situation.**
+**You need to change the path in compile.sh according to your situation!**
 
 To use OVS, there is nothing different with the original version. We give 
 examples in `start-vswitchd.sh` and `bridge.sh`. You can use:

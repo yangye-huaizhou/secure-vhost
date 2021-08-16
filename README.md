@@ -193,8 +193,9 @@ Comparing these two figures, it is easy to find that each packet only needs one 
 of memory copying from host buffer to VM memory. The only change exists in shared memory 
 and the packet copier.
 
-To allow QEMU access vSwitch's host buffer, we compile QEMU into DPDK EAL. So all QEMU 
-processes and vSwitch process can operate the packets in `mbuf_pool` concurrently.
+In secure-vhost, to allow QEMU access vSwitch's host buffer, we compile QEMU into 
+DPDK EAL. So all QEMU processes and vSwitch process can operate the packets in `mbuf_pool` 
+concurrently.
 
 **3.The scheduling of PD threads**
 

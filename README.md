@@ -1,4 +1,4 @@
-Secure-vhost is a isolation enhanced vhost-user para-virtualized network I/O. 
+Secure-vhost is an isolation enhanced vhost-user para-virtualized network I/O. 
 It is built for the cloud platform, which runs VMs in high density. The VM memory 
 isolation breakage in vhost-user may bring security risks for VMs on cloud. So 
 in secure-vhost, we modify the memory sharing model to copy packets between VM 

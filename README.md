@@ -36,8 +36,8 @@ In this enhanced solution, each time when vSwitch needs to access VM's memory
 for packet copying, it should firstly send a socket based message to query QEMU 
 process for address translation. The address translation done by the software 
 vIOMMU can confirm the legitimacy of VM memory access. However, frequent 
-communication will reduce performance to 20%, with severe packet loss. So it 
-is rarely used for practical environments.
+communication will reduce performance to 20%, with severe packet loss (when using 
+kernel driver inside the VM). So it is rarely used for practical environments.
 
 ## What is secure-vhost?
 
@@ -57,8 +57,8 @@ Xie, "Isolation Guarantee for Efficient Virtualized Network I/O on Cloud Platfor
 
 ## What is the difference between IVSHMEM, NetVM and secure-vhost?
 
-About ten years ago, a noval virtualized network I/O solution was proposed. That eventually develops the 
-well-known IVSHMEM and NetVM. They all adopt the memory sharing mechanism that shares 
+About ten years ago, a noval virtualized network I/O solution was proposed. That eventually 
+develops the well-known IVSHMEM and NetVM. They all adopt the memory sharing mechanism that shares 
 vSwitch's host packet buffer among all VMs, so that the packet copying is eliminated. 
 All VMs can operate such a block of memory transparently. Once the packet is DMAed from 
 hardware NIC to the host buffer, the vSwitch can notify the corresponding VM to access 
@@ -147,14 +147,16 @@ An example is as below:
 ./qemu-system-x86_64 -c 14 -w 0000:00:04.0 -- -machine accel=kvm -cpu host -smp...
 ```
 
-Here, the `-c 14` means the PD thread (packet copying thread, see "**2.The memory sharing and data path**") 
-will be bond to CPU core 14. Please note that the scheduling strategy of PD threads is 
-"SCHED_FIFO", so **do not** use this CPU core to do anything else for it will always be occupied by the PD thread. 
-We recommend to bind PD thread to an isolated CPU core.
+Here, the `-c 14` means the PD thread (packet copying thread, see "**2.The memory 
+sharing and data path**") will be bond to CPU core 14. Please note that the 
+scheduling strategy of PD threads is "SCHED_FIFO", so **do not** use this CPU core 
+to do anything else for it will always be occupied by the PD thread. We recommend 
+to bind PD thread to an isolated CPU core.
 
 For specific commands for booting VM, you can learn from script `setup.sh`.
 
-Please check the **PATH** inside all of the scrpts that you want to use and make sure they really meets your actual situation.
+Please check the **PATH** inside all of the scrpts that you want to use and make 
+sure they really meets your actual situation.
 
 
 ## What is the difference between vhost-user and secure-vhost?
@@ -225,7 +227,8 @@ before it calls `"sched_yield()"` to yield CPU core for others.
 
 As secure-vhost is implemented on the old version of the open source software. Someone may 
 want to use it in latest version. But unfortunately, this demo is deeply coupled in the 
-software code. We can only give a guide about how to modify the original files to implement the main function of secure-vhost.
+software code. We can only give a guide about how to modify the original files to implement 
+the main function of secure-vhost.
 
 ```
 For DPDK:

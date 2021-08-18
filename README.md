@@ -53,7 +53,7 @@ copying is more secure.
 More security discussion can be seen in paper: 
 >Ye Yang, Haiyang Jiang, Yongzheng Liang, Yulei Wu, Yilong Lv, Xing Li and Gaogang 
 Xie, "Isolation Guarantee for Efficient Virtualized Network I/O on Cloud Platform" 
-(accepted by HPCC-2020).
+(accepted by HPCC-2020). See https://ieeexplore.ieee.org/document/9408002.
 
 ## What is the difference between IVSHMEM, NetVM and secure-vhost?
 

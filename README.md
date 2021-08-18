@@ -171,7 +171,7 @@ following figure:
   <img src="./media/socket_channel_vhostuser.png"/>
 <p/>
 
-The most important step is to process signal `VHOST_USER_SET_MEM_TABLE`, which 
+The most important step is to process message `VHOST_USER_SET_MEM_TABLE`, which 
 is to call `"mmap()"` function to map VM's whole memory into vSwitch's memory 
 address. 
 

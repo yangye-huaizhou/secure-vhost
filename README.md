@@ -219,7 +219,7 @@ before it calls `"sched_yield()"` to yield CPU core for others.
 
 As secure-vhost is implemented on the old version of the open source software. Someone may 
 want to use it in latest version. But unfortunately, this demo is deeply coupled in the 
-software code. We can only give a guide about how to modify the original files.
+software code. We can only give a guide about how to modify the original files to implement the main function of secure-vhost.
 
 ```
 For DPDK:

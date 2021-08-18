@@ -215,7 +215,7 @@ concurrently.
 
 **3.The scheduling of PD threads**
 
-As each VM has a separaed PD thread for copying packets. The CPU consumption will increase. 
+As each VM has a separated PD thread for copying packets. The CPU consumption will increase. 
 To make it more CPU-friendly, we schedule multiple PD threads on the same CPU core. 
 
 But under Linux default "SCHED_OTHER" scheduling, one PD thread may be preempted when it is 

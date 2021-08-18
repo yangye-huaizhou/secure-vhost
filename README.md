@@ -81,7 +81,7 @@ NetVM are zero-copy solutions).
 
 The prototype system was implmented based on `DPDK-17.11.2`, `OVS-2.9.2` and `qemu-2.10.0-rc3`.
 
-It has been successfully built on:
+This demo has been successfully built on:
 
 ```
 OS: Ubuntu 16.04.1 (Kernel 4.15.0-142-generic)
@@ -89,7 +89,7 @@ CPU: Intel(R) Xeon(R) CPU E5-4603 v2 @ 2.20GHz
 NIC: Intel 82599ES 10-Gigabit Dual Port NIC
 ```
 
-Other platforms have not been tested yet.
+But it has not been verified on other platforms yet.
 
 To compile this demo, you should compile DPDK first:
 

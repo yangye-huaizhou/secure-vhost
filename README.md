@@ -216,7 +216,7 @@ concurrently.
 **3.The scheduling of PD threads**
 
 As each VM has a separaed PD thread for copying packets. The CPU consumption will increase. 
-To make it more CPU friendly, we schedule multiple PD threads on the same CPU core. 
+To make it more CPU-friendly, we schedule multiple PD threads on the same CPU core. 
 
 But under Linux default "SCHED_OTHER" scheduling, one PD thread may be preempted when it is 
 in the critical zone. And that will cause serious dead lock (see "Known Issues" in http://doc.dpdk.org/guides/prog_guide/env_abstraction_layer.html). 

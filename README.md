@@ -81,13 +81,15 @@ NetVM are zero-copy solutions).
 
 The prototype system was implmented based on `DPDK-17.11.2`, `OVS-2.9.2` and `qemu-2.10.0-rc3`.
 
-It can be successfully built on:
+It has been successfully built on:
 
 ```
 OS: Ubuntu 16.04.1 (Kernel 4.15.0-142-generic)
 CPU: Intel(R) Xeon(R) CPU E5-4603 v2 @ 2.20GHz
 NIC: Intel 82599ES 10-Gigabit Dual Port NIC
 ```
+
+Other platforms have not been tested yet.
 
 To compile this demo, you should compile DPDK first:
 
@@ -105,7 +107,7 @@ make
 ```
 
 *The SPDK here is used to release the CPU from the heavy memory copying task, and 
-to complete the memory-memory DMA operation via IOAT DMA engine. But as far as I 
+to complete the memory-memory DMA operation via IOAT DMA engine. But as far as we 
 know, the latest version of DPDK already supports this kind of DMA operation, and 
 SPDK is no longer needed if you want to compile secure-vhost into higher version 
 DPDK.*

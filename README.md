@@ -134,13 +134,21 @@ examples in `start-vswitchd.sh` and `bridge.sh`. You can use:
 
 But for QEMU, we added DPDK EAL commands before QEMU commands. The two kinds of 
 commands are separated by "--". 
-Here is an example:
+
+An example is as below:
 
 ```
 ./qemu-system-x86_64 -c 14 -w 0000:00:04.0 -- -machine accel=kvm -cpu host -smp...
 ```
 
-We also write an script in `setup.sh`.
+Here, the `-c 14` means the PD thread (packet copying thread, see "**2.The memory sharing and data path**") 
+will be bond to CPU core 14. Please note that the scheduling strategy of PD threads is 
+"SCHED_FIFO", so **do not** use this CPU core to do anything else for it will always be occupied by the PD thread. 
+We recommend to bind PD thread to an isolated CPU core.
+
+For specific commands for booting VM, you can learn from script `setup.sh`.
+
+Please check the **PATH** inside all of the scrpts that you want to use and make sure they really meets your actual situation.
 
 
 ## What is the difference between vhost-user and secure-vhost?

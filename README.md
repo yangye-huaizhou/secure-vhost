@@ -148,7 +148,7 @@ An example is as below:
 ```
 
 Here, the `-c 14` means the PD thread (packet copying thread, see "**2.The memory 
-sharing and data path**") will be bond to CPU core 14. Please note that the 
+sharing and data path**") will be bound to CPU core 14. Please note that the 
 scheduling strategy of PD threads is "SCHED_FIFO", so **do not** use this CPU core 
 to do anything else for it will always be occupied by the PD thread. We recommend 
 to bind PD thread to an isolated CPU core.
